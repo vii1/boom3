@@ -1,0 +1,452 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_BOOMEDITACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "+",            ID_ZOOMIN,              ASCII,  NOINVERT
+    "+",            ID_ZOOMGRIDIN,          ASCII,  ALT, NOINVERT
+    "-",            ID_ZOOMOUT,             ASCII,  NOINVERT
+    "-",            ID_ZOOMGRIDOUT,         ASCII,  ALT, NOINVERT
+    "1",            ID_TOGGLEXY,            VIRTKEY, ALT, NOINVERT
+    "2",            ID_TOGGLEXZ,            VIRTKEY, ALT, NOINVERT
+    "3",            ID_TOGGLEYZ,            VIRTKEY, ALT, NOINVERT
+    "4",            ID_TOGGLE3D,            VIRTKEY, ALT, NOINVERT
+    "D",            ID_DELETESECTOR,        VIRTKEY, CONTROL, NOINVERT
+    "E",            ID_SECTOREDIT,          VIRTKEY, CONTROL, NOINVERT
+    "G",            ID_TOGGLEGRID,          VIRTKEY, NOINVERT
+    "I",            ID_INSERTSECTOR,        VIRTKEY, CONTROL, NOINVERT
+    "J",            ID_JOINSECTORS,         VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILEOPEN,            VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILESAVE,            VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_TEXTURES,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_NEWVERTEX,           VIRTKEY, NOINVERT
+    VK_F2,          ID_FILESAVE,            VIRTKEY, NOINVERT
+    VK_F3,          ID_FILEOPEN,            VIRTKEY, NOINVERT
+    VK_INSERT,      ID_NEWCONTOUR,          VIRTKEY, NOINVERT
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_BOOMEDITMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILENEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILEOPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILESAVE
+        MENUITEM "Save &As...",                 ID_FILESAVEAS
+        MENUITEM "E&xit",                       ID_FILEEXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        POPUP "&Sector"
+        BEGIN
+            MENUITEM "&New\tIns",                   ID_NEWCONTOUR
+            MENUITEM "&Insert\tCtrl+I",             ID_INSERTSECTOR
+            MENUITEM "&Delete\tCtrl+D",             ID_DELETESECTOR
+            MENUITEM "&Join\tCtrl+J",               ID_JOINSECTORS
+            MENUITEM "&Edit...\tCtrl+E",            ID_SECTOREDIT
+        END
+        POPUP "&Textures "
+        BEGIN
+            MENUITEM "&Edit...\t Ctrl+T",           ID_TEXTURES
+            MENUITEM "Palette...",                  ID_PALETTE
+            MENUITEM "Default wall...",             ID_SETDEFWALL
+            MENUITEM "Default floor...",            ID_SETDEFFLOOR
+            MENUITEM "Default ceiling...",          ID_SETDEFCEILING
+        END
+        MENUITEM "Insert &Vertex\tV",           ID_NEWVERTEX
+        MENUITEM "New &cluster",                ID_NEWCLUSTER
+        MENUITEM "Start &position",             ID_EDITSTARTPOINT
+        MENUITEM "C&urrent position",           ID_EDITCURRENTPOINT
+        MENUITEM "&Go to current position",     ID_GOTOCURRENTPOSITION
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Zoom &In\t+",                 ID_ZOOMIN
+        MENUITEM "Zoom &Out\t-",                ID_ZOOMOUT
+        MENUITEM "Zoom Grid In\tAlt++",         ID_ZOOMGRIDIN
+        MENUITEM "Zoom Grid Out\tAlt+-",        ID_ZOOMGRIDOUT
+        MENUITEM "&Grid\tG",                    ID_TOGGLEGRID
+        MENUITEM "Start &position",             ID_VIEWSTARTPOINT
+        MENUITEM "&Current position",           ID_VIEWCURRENTPOINT
+        MENUITEM "&Status Bar",                 ID_VIEWSTATUSBAR
+        POPUP "&Toolbars"
+        BEGIN
+            MENUITEM "&File toolbar",               ID_FILETOOLBAR
+            MENUITEM "&View toolbar",               ID_VIEWTOOLBAR
+            MENUITEM "&Edit toolbar",               ID_EDITTOOLBAR
+        END
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&XY View\tAlt+1",             ID_TOGGLEXY
+        MENUITEM "X&Z View\tAlt+2",             ID_TOGGLEXZ
+        MENUITEM "&YZ View\tAlt+3",             ID_TOGGLEYZ
+        MENUITEM "&3D View\tAlt+4",             ID_TOGGLE3D
+        MENUITEM "Current &sector",             ID_VIEWSECTOR
+        MENUITEM "&Clusters",                   ID_VIEWCLUSTERS
+        MENUITEM "&Textures",                   ID_VIEWTEXTURES
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   ID_ABOUT
+    END
+END
+
+IDR_TOOLMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "textures"
+    BEGIN
+        MENUITEM "Default &wall",               ID_SETDEFWALL
+        MENUITEM "Default &floor",              ID_SETDEFFLOOR
+        MENUITEM "Default ceiling",             ID_SETDEFCEILING
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_SECTORINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 143
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
+    END
+
+    IDD_CLUSTERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 143
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_SECTOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 190
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_NEWSECTOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 190
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_TEXTURES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 230
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    IDD_CHANGETEXTURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 230
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    IDD_MAPPING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 143
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 73
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About BOOM Editor"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDCANCEL,67,74,50,14
+    CTEXT           "BOOM Editor",IDC_STATIC,57,15,83,8,SS_CENTERIMAGE
+    CTEXT           "by Ivaylo Beltchev",IDC_STATIC,58,26,82,8,
+                    SS_CENTERIMAGE
+    CTEXT           "1998 - 1999",IDC_STATIC,55,41,90,9
+    CONTROL         122,IDC_STATIC,"Static",SS_BITMAP,10,15,43,39
+END
+
+IDD_SECTORINFO DIALOGEX 0, 0, 150, 60
+STYLE WS_CHILD | WS_VISIBLE
+EXSTYLE WS_EX_STATICEDGE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Name",IDC_STATIC,5,20,20,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITNAME,30,20,115,15,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Lines",IDC_STATIC,5,40,20,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITLINES,30,40,35,15,ES_AUTOHSCROLL | ES_READONLY
+    CTEXT           "Current Sector Information",IDC_STATIC,5,5,140,10,0,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_CLUSTER,110,40,35,15,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Cluster #",IDC_STATIC,75,40,30,15,SS_CENTERIMAGE
+END
+
+IDD_CLUSTERS DIALOGEX 0, 0, 150, 95
+STYLE WS_CHILD | WS_VISIBLE
+EXSTYLE WS_EX_STATICEDGE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDC_CLUSTERS,5,20,140,70,LBS_USETABSTOPS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Clusters",IDC_STATIC,5,5,140,10,0,WS_EX_STATICEDGE
+END
+
+IDD_SECTOR DIALOG DISCARDABLE  0, 0, 197, 121
+STYLE DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Sector Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Name",-1,5,5,25,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITNAME,30,5,90,15,ES_AUTOHSCROLL
+    GROUPBOX        "Floor",-1,5,26,185,30
+    EDITTEXT        IDC_EDITZFA,25,35,40,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZFB,85,35,40,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZFC,145,35,40,15,ES_AUTOHSCROLL
+    LTEXT           "Z=",-1,10,34,10,15,SS_CENTERIMAGE
+    LTEXT           "X +",-1,70,35,15,15,SS_CENTERIMAGE
+    LTEXT           "Y +",-1,130,35,15,15,SS_CENTERIMAGE
+    GROUPBOX        "Celinig",-1,5,60,185,30
+    LTEXT           "Z=",-1,10,68,10,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITZCA,25,70,40,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZCB,85,70,40,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZCC,145,70,40,15,ES_AUTOHSCROLL
+    LTEXT           "X +",-1,70,70,15,15,SS_CENTERIMAGE
+    LTEXT           "Y +",-1,130,70,15,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITCLUSTER,160,5,30,15,ES_AUTOHSCROLL
+    LTEXT           "Cluster #",-1,125,5,35,15,SS_CENTERIMAGE
+    DEFPUSHBUTTON   "OK",IDOK,35,100,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,110,100,50,14
+END
+
+IDD_NEWSECTOR DIALOG DISCARDABLE  0, 0, 197, 146
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "New sector"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_CLUSTERS,5,20,140,70,LBS_USETABSTOPS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "OK",IDOK,30,125,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,115,125,50,14
+    PUSHBUTTON      "New",IDC_NEWCLUSTER,150,20,40,14
+    LTEXT           "Cluster",IDC_STATIC,5,5,35,10
+    EDITTEXT        IDC_EDITFLOOR,50,100,40,15,ES_AUTOHSCROLL
+    LTEXT           "Floor height",IDC_STATIC,5,100,40,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITCEILING,150,100,40,15,ES_AUTOHSCROLL
+    LTEXT           "Ceiling height",IDC_STATIC,100,100,45,15,SS_CENTERIMAGE
+END
+
+IDD_TEXTURES DIALOG DISCARDABLE  0, 0, 237, 186
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Textures"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&Add",IDC_ADDTXT,165,65,50,15
+    PUSHBUTTON      "R&emove",IDC_DELTXT,165,105,50,15
+    CONTROL         "",IDC_TXTBITMAP,"Static",SS_BITMAP,23,20,128,128
+    SCROLLBAR       IDC_TXTSCROLL,151,20,10,128,SBS_TOPALIGN | SBS_VERT
+    PUSHBUTTON      "&Replace",IDC_REPLACETXT,165,85,50,15
+    DEFPUSHBUTTON   "Close",IDOK,93,165,50,15
+    GROUPBOX        "Textures",IDC_STATIC,10,5,215,150
+    EDITTEXT        IDC_TXTNAME,165,20,50,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_TXTSIZE,165,35,50,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    PUSHBUTTON      "&Save as",IDC_SAVETXT,165,125,50,15
+END
+
+IDD_CHANGETEXTURE DIALOG DISCARDABLE  0, 0, 237, 186
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Texture"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&Add",IDC_ADDTXT,165,65,50,15
+    PUSHBUTTON      "R&emove",IDC_DELTXT,165,105,50,15
+    CONTROL         "",IDC_TXTBITMAP,"Static",SS_BITMAP,23,20,128,128
+    SCROLLBAR       IDC_TXTSCROLL,151,20,10,128,SBS_TOPALIGN | SBS_VERT
+    PUSHBUTTON      "&Replace",IDC_REPLACETXT,165,85,50,15
+    DEFPUSHBUTTON   "OK",IDOK,63,165,50,15
+    PUSHBUTTON      "Cancel",IDCANCEL,123,165,50,15
+    GROUPBOX        "Textures",IDC_STATIC,10,5,215,150
+    EDITTEXT        IDC_TXTNAME,165,20,50,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_TXTSIZE,165,35,50,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    PUSHBUTTON      "&Save as",IDC_SAVETXT,165,125,50,15
+END
+
+IDD_MAPPING DIALOGEX 0, 0, 150, 80
+STYLE WS_CHILD | WS_VISIBLE
+EXSTYLE WS_EX_STATICEDGE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CTEXT           "Texture Mapping",IDC_STATIC,5,5,140,10,0,
+                    WS_EX_STATICEDGE
+    LTEXT           "Texture",IDC_STATIC,5,60,30,15,SS_CENTERIMAGE
+    LTEXT           "Polygons",IDC_STATIC,5,20,30,15
+    EDITTEXT        IDC_MAP,35,60,110,15,ES_AUTOHSCROLL | ES_READONLY
+    LISTBOX         IDC_POLYGONS,35,20,110,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_FILETOOLBAR TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON40051
+    BUTTON      ID_BUTTON40052
+    BUTTON      ID_BUTTON40053
+END
+
+IDR_VIEWTOOLBAR TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON40054
+    BUTTON      ID_BUTTON40055
+    BUTTON      ID_BUTTON40060
+    BUTTON      ID_BUTTON40061
+    BUTTON      ID_BUTTON40085
+    BUTTON      ID_BUTTON40079
+    BUTTON      ID_BUTTON40080
+    BUTTON      ID_BUTTON40081
+    BUTTON      ID_BUTTON40082
+    BUTTON      ID_BUTTON40083
+    BUTTON      ID_BUTTON40084
+    BUTTON      ID_BUTTON40104
+END
+
+IDR_EDITTOOLBAR TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON40073
+    BUTTON      ID_BUTTON40076
+    BUTTON      ID_BUTTON40075
+    BUTTON      ID_BUTTON40097
+    BUTTON      ID_BUTTON40077
+    BUTTON      ID_BUTTON40078
+    BUTTON      ID_BUTTON40074
+    BUTTON      ID_BUTTON40103
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_FILETOOLBAR         BITMAP  DISCARDABLE     "bmp00001.bmp"
+IDR_VIEWTOOLBAR         BITMAP  DISCARDABLE     "toolbar2.bmp"
+IDR_EDITTOOLBAR         BITMAP  DISCARDABLE     "bmp00002.bmp"
+IDB_BOOMBITMAP          BITMAP  DISCARDABLE     "bitmap1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_BOOMICON            ICON    DISCARDABLE     "icon1.ico"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

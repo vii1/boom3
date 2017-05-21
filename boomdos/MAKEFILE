@@ -1,0 +1,122 @@
+##########################################################################
+##                                                                      ##
+##   BOOM 2 Engine                                                      ##
+##                                                                      ##
+##   MAKEFILE - make file for MS-DOS version                            ##
+##   requires Watcom C++ 11.0 and Watcom Assembler                      ##
+##                                                                      ##
+##   by Ivaylo Beltchev                                                 ##
+##   e-mail: ivob@geocities.com                                         ##
+##   www:    www.geocities.com/SiliconValley/Bay/2234                   ##
+##                                                                      ##
+##########################################################################
+
+code_size = 386
+
+compiler_options = -mf -5r -s -otlranmi -fp5 -zp1 -zdp -fpi87 -fp3 -w2 -e20  -i=..\ENGINE\
+
+linker_options = &
+  option eliminate &
+  system dos4g &
+  option stack=32768
+
+object_files = &
+  BOOMDOS.OBJ &
+  KBD.OBJ &
+  TIMER.OBJ &
+  MOUSE.OBJ &
+  DOS4GW.OBJ &
+  VBE20.OBJ &
+  GRTEXT.OBJ &
+  COLLIDE.OBJ &
+  DRAW.OBJ &
+  GEOM.OBJ &
+  PLAYER.OBJ &
+  READ.OBJ &
+  TCLIP.OBJ &
+  TCLUSTER.OBJ &
+  THOLE.OBJ &
+  TLINE.OBJ &
+  TMAP.OBJ &
+  TMAPITEM.OBJ &
+  TPORTAL.OBJ &
+  TSECTOR.OBJ &
+  TTEXTURE.OBJ &
+  TTRAP.OBJ &
+  TWALL.OBJ &
+  WRITE.OBJ
+
+BOOMDOS.EXE : $(object_files)
+  *wlink $(linker_options) name BOOMDOS.EXE file {$(object_files)}
+
+BOOMDOS.OBJ : BOOMDOS.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+KBD.OBJ : KBD.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TIMER.OBJ : TIMER.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+MOUSE.OBJ : MOUSE.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+DOS4GW.OBJ : DOS4GW.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+VBE20.OBJ : VBE20.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+GRTEXT.OBJ : GRTEXT.ASM .AUTODEPEND
+  WASM GRTEXT.ASM -i=..\ENGINE\ -fo=GRTEXT.OBJ 
+
+COLLIDE.OBJ : ..\ENGINE\COLLIDE.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+DRAW.OBJ : ..\ENGINE\DRAW.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+GEOM.OBJ : ..\ENGINE\GEOM.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+PLAYER.OBJ : ..\ENGINE\PLAYER.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+READ.OBJ : ..\ENGINE\READ.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TCLIP.OBJ : ..\ENGINE\TCLIP.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TCLUSTER.OBJ : ..\ENGINE\TCLUSTER.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+THOLE.OBJ : ..\ENGINE\THOLE.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TLINE.OBJ : ..\ENGINE\TLINE.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TMAP.OBJ : ..\ENGINE\TMAP.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TMAPITEM.OBJ : ..\ENGINE\TMAPITEM.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TPORTAL.OBJ : ..\ENGINE\TPORTAL.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TSECTOR.OBJ : ..\ENGINE\TSECTOR.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TTEXTURE.OBJ : ..\ENGINE\TTEXTURE.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TTRAP.OBJ : ..\ENGINE\TTRAP.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+TWALL.OBJ : ..\ENGINE\TWALL.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
+
+WRITE.OBJ : ..\ENGINE\WRITE.CPP .AUTODEPEND
+  *wpp$(code_size) $(compiler_options) $[* 
