@@ -125,7 +125,7 @@ int Tsector::build_contours(Tcont *c)
   Tline *l=lines,*last;
   int i=0;
   coord3d x1,z1,x2,z2;
-  coord2d sx1,sx2;
+  coord2d sx1,sx2=0;
   Tcont *c1=c;
   int cn=0;
 

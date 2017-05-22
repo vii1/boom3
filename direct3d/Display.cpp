@@ -202,7 +202,8 @@ bool display_device_done()
 
 static unsigned count_bits( unsigned x )
 {
-  for (unsigned n=0;x;x&=(x-1),n++) {}
+	unsigned n;
+  for (n=0;x;x&=(x-1),n++) {}
   return n;
 }
 
@@ -265,7 +266,8 @@ bool display_mode_init( unsigned nback_buffers, bool z_buffer, const DisplayMode
 {
   if (mode->bit_depth<16) return system_err( "Can't set mode with bit depth < 16" );
   if (nback_buffers<1 || nback_buffers>2) return system_err( "Back buffers count could be either 1 or 2" );
-  for (unsigned i=0;i<__nmodes;i++)
+  unsigned i;
+  for (i=0;i<__nmodes;i++)
     if (__modes[i].width==mode->width && __modes[i].height==mode->height && __modes[i].bit_depth==mode->bit_depth &&
         (!mode->r || __modes[i].r==mode->r) && (!mode->g || __modes[i].g==mode->g) && (!mode->b || __modes[i].b==mode->b)) break;
   if (i==__nmodes) return system_err( "Requested display mode not available" );

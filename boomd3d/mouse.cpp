@@ -16,8 +16,8 @@
 #include "system.h"
 #include <dinput.h>
 
-static IDirectInput *dinput=NULL;
-static IDirectInputDevice *dimouse=NULL;
+static IDirectInput8 *dinput=NULL;
+static IDirectInputDevice8 *dimouse=NULL;
 static bool mousefl=false;
 
 // frees all allocated resources
@@ -33,7 +33,7 @@ bool mouse_init( void )
 {
   ShowCursor(FALSE);
   atexit(mouse_done);
-  if (DirectInputCreate(hinst,DIRECTINPUT_VERSION,&dinput,NULL)!=DI_OK) return false;
+  if (DirectInput8Create(hinst,DIRECTINPUT_VERSION,IID_IDirectInput8,(LPVOID*)&dinput,NULL)!=DI_OK) return false;
   if (dinput->CreateDevice(GUID_SysMouse,&dimouse,NULL)!=DI_OK) return false;
   if (dimouse->SetDataFormat(&c_dfDIMouse)!=DI_OK) return false;
   if (dimouse->SetCooperativeLevel(hwndMain,DISCL_NONEXCLUSIVE|DISCL_FOREGROUND)!=DI_OK) return false;
