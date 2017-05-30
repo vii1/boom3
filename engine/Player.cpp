@@ -114,10 +114,10 @@ bool player_idle(long time)
     }
 
     // if the current position is invalid, find a new one
-    Tcluster *c;
+    Cluster *c;
     int ci;
     for (ci=0,c=map->clusters;ci<map->clustersnum;NEXTCLUSTER(c),ci++) {
-      Tsector *s;
+      Sector *s;
       int si;
       for (si=0,s=c->sectors;si<c->sectorsnum;NEXTSECTOR(s),si++)
         if (s->inside(view.x,view.y)) {

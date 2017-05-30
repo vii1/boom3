@@ -10,20 +10,9 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _COLLIDE_H
-#define _COLLIDE_H
+#ifndef _BOOM_COLLIDE_H_
+#define _BOOM_COLLIDE_H_
 
 #include "types.h"
-
-#ifdef _COLLIDE_CPP
-  #define GLOBAL
-#else
-  #define GLOBAL extern
-#endif
-
-GLOBAL coord3d zfloor,zceiling; // current floor and ceiling height
-  
-#undef GLOBAL
-
 
 #endif

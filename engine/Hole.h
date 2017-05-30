@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tportal.h - class Tportal interface                                //
+//   Hole.h - class Hole interface                                    //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,28 +10,23 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _TPORTAL_H
-#define _TPORTAL_H
+#ifndef _THOLE_H
+#define _THOLE_H
 
-#include "Tclip.h"
-
-// Tportal is a wall without texture that leads to another cluster
-// it combines the features of hole and clip
-class Tportal: public Thole, public Tclip
+// Hole is a wall without texture that leads to another sector
+class Hole: public Wall
 {
 public:
-  Tcluster *target; // target cluster
+  Sector *sector;  // target sector
 
-  Tportal();
+  Hole();
 
-  // saves the portal to the current file
-  virtual void save(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
-  // loads the portal from the current file
+  // saves the hole to the current file
+  virtual void save(Map *m,Cluster *c,Sector *s,Line *l);
+  // loads the hole from the current file
   virtual bool load();
-  // initializes the portal after the loading
-  virtual void postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
-  // draws the portal
-  virtual void draw(Tmonotone *mp);
+  // initializes the hole after the loading
+  virtual void postload(Map *m,Cluster *c,Sector *s,Line *l);
 };
 
 #endif

@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tsector.h - class Tsector interface                                //
+//   Sector.h - class Sector interface                                //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -16,41 +16,41 @@
 #include "Ttrap.h"
 #include "Ttexture.h"
 
-struct Tcont;
+struct Cont;
 
 enum
 {
   seLAST_SECTOR = 0x01, //it's the last sector
 };
 
-// Tcluster contains all the information for one sector in the cluster
-class Tsector: public Tmap_item
+// Cluster contains all the information for one sector in the cluster
+class Sector: public MapItem
 {
 public:
-  Tline *lines; // lines in the sector
+  Line *lines; // lines in the sector
   int linesnum; // number of the lines in the sector
 
   float zfa,zfb,zfc,zca,zcb,zcc;  // floor and ceiling equation coeficients
   int tfloor, tceiling; // floor and ceiling textures
   coord3d minx,maxx,miny,maxy;  // sector bounding box
 
-  Tsector();
+  Sector();
 
   // saves the sector to the current file
-  void save(Tmap *m,Tcluster *c);
+  void save(Map *m,Cluster *c);
   // loads the sector from the current file
   bool load();
   // unloads the sector (releases all resources allocated by load())
   void unload();
   // initializes the sector after the loading
-  void postload(Tmap *m,Tcluster *c);
+  void postload(Map *m,Cluster *c);
 
   // creates the contours from the lines of the sector
-  int build_contours(Tcont *c);
+  int build_contours(Cont *c);
   // fills polygon fp with the texture of the floor
-  void draw_floor(Tmonotone *mp);
+  void draw_floor(Monotone *mp);
   // fills polygon fp with the texture of the ceiling
-  void draw_ceiling(Tmonotone *mp);
+  void draw_ceiling(Monotone *mp);
   // returns the height of the floor at point (x,y)
   coord3d getzf(coord3d x,coord3d y);
   // returns the height of the ceiling at point (x,y)
@@ -58,7 +58,7 @@ public:
   // must be called when the height of the floor or ceiling is changed
   void changeheight( void );
   // returns the line with ends v1 and v2
-  Tline *getline(int v1,int v2);
+  Line *getline(int v1,int v2);
 
   // implementation of these functions is in collide.cpp
   // checks if (x,y) is inside the sector (in 2D)
@@ -69,7 +69,7 @@ public:
   int collision(coord3d x,coord3d y,coord3d z);
 
 #ifdef EDITOR
-  Tsector *next;
+  Sector *next;
 #endif
 };
 
@@ -83,10 +83,10 @@ public:
 #define MAX_LINES_PER_CONTOUR 20
 
 // contour (used in realtime sorting)
-struct Tcont
+struct Cont
 {
-  Tsector *s; // sector of the contour
-  Tline *l1;  // first line of the contour
+  Sector *s; // sector of the contour
+  Line *l1;  // first line of the contour
   int n;      // number of the lines in the contour
   coord2d x1,x2;  // minimal and maximal x coordinate of the projection on the screen
   coord3d minz,maxz;  // minimal and maximal z coordinate in camera space

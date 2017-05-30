@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tportal.cpp - class Tportal implementation                         //
+//   Portal.cpp - class Portal implementation                         //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -16,24 +16,24 @@
 #include "write.h"
 
 
-Tportal::Tportal():
-  Thole()
+Portal::Portal():
+  Hole()
 {
 }
 
 // saves the portal to the current file
-void Tportal::save(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
+void Portal::save(Map *m,Cluster *c,Sector *s,Line *l)
 {
   wrchar(wtPORTAL);
   savewall();
 #ifdef EDITOR
   int si;
-  Tsector *s0;
+  Sector *s0;
   for (si=0,s0=target->sectors;s0!=sector;si++,NEXTSECTOR(s0));
   // writes the index of the target sector
   wrlong(si);
   int ci;
-  Tcluster *c0;
+  Cluster *c0;
   for (ci=0,c0=m->clusters;c0!=target;ci++,NEXTCLUSTER(c0));
   // writes the index of the target cluster
   wrlong(ci);
@@ -46,23 +46,23 @@ void Tportal::save(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
 }
 
 // loads the portal from the current file
-bool Tportal::load()
+bool Portal::load()
 {
-  Thole::load();
+  Hole::load();
   // reads the index of the target cluster
   *(long *)&target = rdlong();
   return true;
 }
 
 // initializes the portal after the loading
-void Tportal::postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
+void Portal::postload(Map *m,Cluster *c,Sector *s,Line *l)
 {
   // converts cluster index to cluster pointer
   target=m->getcluster(*(long *)&target);
   // converts sector index to sector pointer
 #ifdef EDITOR
   int si;
-  Tsector *s0;
+  Sector *s0;
   for (si=0,s0=target->sectors;si<*(long *)&sector;si++,NEXTSECTOR(s0));
   sector=s0;
 #else
@@ -71,10 +71,10 @@ void Tportal::postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
 }
 
 // draws the portal
-void Tportal::draw(Tmonotone *mp)
+void Portal::draw(Monotone *mp)
 {
   // stores the current clip
-  Tclip *old=cur_clip;
+  Clip *old=cur_clip;
 
   // sets the portal to be the current clip
   xmin=mp->xmin;

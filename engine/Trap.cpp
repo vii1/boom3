@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Ttrap.cpp - Ttrap and Tmonotone implementation                     //
+//   Trap.cpp - Trap and Monotone implementation                     //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -14,7 +14,7 @@
 #include "Ttrap.h"
 
 // different kind of constructors to initialize the object
-Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22)
+Trap::Trap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22)
 {
   x2=_x2;
   un=csegment++;
@@ -28,7 +28,7 @@ Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22)
 #endif
 }
 
-Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,int _un,int _dn)
+Trap::Trap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,int _un,int _dn)
 {
   x2=_x2;
   un=_un;
@@ -42,7 +42,7 @@ Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,int
 #endif
 }
 
-Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,Ttrap *_next)
+Trap::Trap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,Trap *_next)
 {
   x2=_x2;
   y11=_y11;
@@ -55,7 +55,7 @@ Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,Ttr
 #endif
 }
 
-Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,int _un,int _dn,Ttrap *_next)
+Trap::Trap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,int _un,int _dn,Trap *_next)
 {
   x2=_x2;
   un=_un;
@@ -70,7 +70,7 @@ Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22,int
 #endif
 }
 
-Ttrap::~Ttrap( void )
+Trap::~Trap( void )
 {
 #ifdef COUNT_TRAPS
   total_traps--;

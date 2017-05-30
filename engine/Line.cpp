@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tline.cpp - class Tline implementation                             //
+//   Line.cpp - class Line implementation                             //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -23,32 +23,32 @@
 #include <string.h>
 #include <math.h>
 
-Tline::Tline():
-  Tmap_item()
+Line::Line():
+  MapItem()
 {
   walls = NULL;
 }
 
 // saves the line to the current file
-void Tline::save(Tmap *m,Tcluster *c,Tsector *s)
+void Line::save(Map *m,Cluster *c,Sector *s)
 {
-  Tmap_item::save();
+  MapItem::save();
   // writes first and second ends
   wrlong( v1 );
   wrlong( v2 );
 
   // writes all the walls
   wrlong(wallsnum);
-  Twall **w;
+  Wall **w;
   int i;
   for (i=0,w=walls;i<wallsnum;NEXTWALL(w),i++)
     (*w)->save(m,c,s,this);
 }
 
 // loads the line from the current file
-bool Tline::load()
+bool Line::load()
 {
-  Tmap_item::load();
+  MapItem::load();
   // reads first and second ends
   v1 = rdlong();
   v2 = rdlong();
@@ -57,25 +57,25 @@ bool Tline::load()
   int n = rdlong();
   if (n==0) return false;
 #ifndef EDITOR
-  walls = (Twall **)malloc( n*sizeof(Twall*) );
+  walls = (Wall **)malloc( n*sizeof(Wall*) );
 #else
-  walls = (Twall **)malloc( sizeof(Twall*) );
+  walls = (Wall **)malloc( sizeof(Wall*) );
 #endif
   if (!walls) return false;
-  Twall **w;
+  Wall **w;
   int i;
   for (i=0,w=walls;i<n;i++,NEXTWALL(w)) {
     byte kind = rdchar();
     // create the walls
     switch (kind) {
       case wtWALL:
-        (*w) = new Twall();
+        (*w) = new Wall();
         break;
       case wtHOLE:
-        (*w) = new Thole();
+        (*w) = new Hole();
         break;
       case wtPORTAL:
-        (*w) = new Tportal();
+        (*w) = new Portal();
         break;
     }
     if (!(*w)->load()) {
@@ -83,7 +83,7 @@ bool Tline::load()
       for (;w>=walls;w--)
         delete *w;
 #else
-      Twall *w0,*n;
+      Wall *w0,*n;
       for (w0=*walls;w0;w0=n) {
         n=w0->next;
         delete w0;
@@ -98,7 +98,7 @@ bool Tline::load()
 }
 
 // initializes the line after the loading
-void Tline::postload(Tmap *m,Tcluster *c,Tsector *s)
+void Line::postload(Map *m,Cluster *c,Sector *s)
 {
   // calcultes the length of the line
   coord3d dx=verts[v2].x-verts[v1].x;
@@ -106,23 +106,23 @@ void Tline::postload(Tmap *m,Tcluster *c,Tsector *s)
   len=sqrt(dx*dx+dy*dy);
 
   //calls postload for all the walls
-  Twall **w=walls;
+  Wall **w=walls;
   for (int i=0;i<wallsnum;i++,NEXTWALL(w))
     (*w)->postload(m,c,s,this);
 }
 
 // unloads the line (releases all resources allocated by load())
-void Tline::unload()
+void Line::unload()
 {
   // unloads all the walls
   if (walls) {
 #ifndef EDITOR
-    Twall **w = walls;
+    Wall **w = walls;
     for (int i=0;i<wallsnum;i++,w++)
       delete (*w);
 #else
-    Twall *w = *walls;
-    Twall *n;
+    Wall *w = *walls;
+    Wall *n;
     for (int i=0;i<wallsnum;i++,w=n) {
       n=w->next;
       delete  w;
@@ -151,13 +151,13 @@ static bool infront(coord3d x,coord3d y)
 }
 
 // draws the line
-void Tline::draw( Tsector *owner )
+void Line::draw( Sector *owner )
 {
   coord3d x1r,y1r,x2r,y2r;
   coord3d t1,t2;
   coord2d x1,x2,x1c,x2c;
-  Tmonotone mp,mph;
-  Twall **w;
+  Monotone mp,mph;
+  Wall **w;
 
   coord3d ox1=verts[v1].x;
   coord3d oy1=verts[v1].y;
@@ -234,7 +234,7 @@ void Tline::draw( Tsector *owner )
       coord3d z0=(owner->getzf(ox1,oy1)*orx2-owner->getzf(ox2,oy2)*orx1)/(orx2-orx1);
       w=walls;
       for (int wi=0;wi<wallsnum;wi++,NEXTWALL(w)) {
-        Twall *wp=*w;
+        Wall *wp=*w;
         coord3d z1=(wp->z1c*orx2-wp->z2c*orx1)/(orx2-orx1);
         if (z0<=view.z && z1>=view.z) {
           // if there is a visible wall, fill the whole clip with it
@@ -255,7 +255,7 @@ void Tline::draw( Tsector *owner )
       cur_clip->clip(x1c,x2c,gymax,gymin,gymax,gymin,&mp);
       (*w)->draw(&mp);
       deltraps(mp.traps);
-      cur_clip->last=mp.traps=new Ttrap(x2c,gymin,gymax,gymin,gymax,0,0,NULL);
+      cur_clip->last=mp.traps=new Trap(x2c,gymin,gymax,gymin,gymax,0,0,NULL);
       cur_clip->restore(mp.traps);
       portx1=_portx1;
       porty1=_porty1;
@@ -316,7 +316,7 @@ void Tline::draw( Tsector *owner )
   w=walls;
   // draws all the walls
   for (wi=0;wi<wallsnum;wi++,NEXTWALL(w)) {
-    Twall *wp=*w;
+    Wall *wp=*w;
     coord3d zq1=wp->z1c;
     coord3d zq2=wp->z2c;
     // interpolates z-s if necessary
@@ -349,12 +349,12 @@ void Tline::draw( Tsector *owner )
 
   // restores cur_clip
   if (mph.traps) {
-	  Ttrap *t;
+	  Trap *t;
     for (t=mph.traps;t->next;t=t->next);
     cur_clip->last=t;
   }
   else {
-    cur_clip->last=mph.traps=new Ttrap(x2c,gymin,gymax,gymin,gymax,0,0,NULL);
+    cur_clip->last=mph.traps=new Trap(x2c,gymin,gymax,gymin,gymax,0,0,NULL);
   }
   cur_clip->restore(mph.traps);
   portx1=_portx1;
@@ -369,8 +369,8 @@ static coord3d xx,yy;
 // compares two holes by their height
 static int cmpholes(const void *h1,const void *h2)
 {
-  coord3d z1=(*(Thole **)h1)->sector->getzf(xx,yy);
-  coord3d z2=(*(Thole **)h2)->sector->getzf(xx,yy);
+  coord3d z1=(*(Hole **)h1)->sector->getzf(xx,yy);
+  coord3d z2=(*(Hole **)h2)->sector->getzf(xx,yy);
   if (z1<z2) return -1;
   if (z1>z2) return 1;
   return 0;
@@ -378,7 +378,7 @@ static int cmpholes(const void *h1,const void *h2)
 #endif
 
 // modifies the walls in the line if one if the heights is changed
-void Tline::changeheight(Tsector *s,bool wave)
+void Line::changeheight(Sector *s,bool wave)
 {
 #ifdef EDITOR
 extern int defwalltxt;
@@ -395,16 +395,16 @@ extern int defwalltxt;
   bool fl1,fl2=false;
 
   fl1=!is_hole(*walls);
-  Twall *w;
-  Twall *ww[MAX_WPL]; // walls
-  Thole *wh[MAX_WPL]; // holes
+  Wall *w;
+  Wall *ww[MAX_WPL]; // walls
+  Hole *wh[MAX_WPL]; // holes
   int wn=0; // number of walls
   int hn=0; // number of holes
 
   // fills ww and wh
   for (w=*walls;w;w=w->next) {
     if (is_hole(w)) {
-      wh[hn]=(Thole *)w;
+      wh[hn]=(Hole *)w;
       hn++;
       fl2=false;
     }
@@ -426,7 +426,7 @@ extern int defwalltxt;
     if (z1>sf1 || z2>sf2) {
       if (!fl1) {
         memmove(ww+1,ww,wn*sizeof(ww[0]));
-        ww[0]=new Twall();
+        ww[0]=new Wall();
         ww[0]->options=waSOLID;
         ww[0]->texture=defwalltxt;
         wn++;
@@ -445,7 +445,7 @@ extern int defwalltxt;
 
   // updates the heights of the walls. adds a new wall if necessary
   for (i=0;i<hn;i++) {
-    Tsector *sc=wh[i]->sector;
+    Sector *sc=wh[i]->sector;
     coord3d tf1=sc->getzf(x1,y1);
     coord3d tf2=sc->getzf(x2,y2);
     coord3d tc1=sc->getzc(x1,y1);
@@ -462,7 +462,7 @@ extern int defwalltxt;
     wh[i]->z2c=tc2;
     if (i>0) {
       if (wi>=wn) {
-        ww[wi]=new Twall();
+        ww[wi]=new Wall();
         ww[wi]->options=waSOLID;
         ww[wi]->texture=defwalltxt;
         wallsnum++;
@@ -480,7 +480,7 @@ extern int defwalltxt;
     coord3d z2=wh[hn-1]->sector->getzc(x2,y2);
     if (fl2 || z1<s->getzc(x1,y1) || z2<s->getzc(x2,y2)) {
       if (wi>=wn) {
-        ww[wi]=new Twall();
+        ww[wi]=new Wall();
         ww[wi]->options=waSOLID;
         ww[wi]->texture=defwalltxt;
         wn++;
@@ -503,7 +503,7 @@ extern int defwalltxt;
   }
 
   // links the walls and the holes in a list again
-  Twall **w0=walls;
+  Wall **w0=walls;
   wi=0;
   if (fl1) {
     *w0=ww[0];
@@ -525,7 +525,7 @@ extern int defwalltxt;
   *w0=NULL;
 #else
   // in case of array, just updates the heights
-  Twall **w;
+  Wall **w;
   int wi;
   coord3d x1=verts[v1].x;
   coord3d y1=verts[v1].y;
@@ -541,7 +541,7 @@ extern int defwalltxt;
   int i=0;
   for (wi=0,w=walls;wi<wallsnum;wi++,NEXTWALL(w)) {
     if (is_hole(*w)) {
-    Tsector *sc=((Thole *)(*w))->sector;
+    Sector *sc=((Hole *)(*w))->sector;
       coord3d tf1=sc->getzf(x1,y1);
       coord3d tf2=sc->getzf(x2,y2);
       coord3d tc1=sc->getzc(x1,y1);
@@ -574,12 +574,12 @@ extern int defwalltxt;
   // calls changeheight for opposite line
   {
     int wi;
-    Twall **w;
+    Wall **w;
     if (wave)
       for (wi=0,w=walls;wi<wallsnum;wi++,NEXTWALL(w)) {
         if (is_hole(*w)) {
-          Tsector *sc=((Thole *)(*w))->sector;
-          Tline *l=sc->getline(v2,v1);
+          Sector *sc=((Hole *)(*w))->sector;
+          Line *l=sc->getline(v2,v1);
           if (l) l->changeheight(sc,false);
         }
       }

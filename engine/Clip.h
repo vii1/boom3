@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tmapitem.cpp - class Tmap_item implementation                      //
+//   Clip.h - class Clip interface                                    //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,32 +10,31 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#define _TMAPITEM_CPP
-#include "Tmapitem.h"
-#include "read.h"
-#include "write.h"
+#ifndef _BOOM_CLIP_H_
+#define _BOOM_CLIP_H_
+
+#include "types.h"
+#include "Trap.h"
+
+namespace boom {
+
+	// Clip is a Monotone that can clip trapezoids with itself  
+	class Clip : public Monotone
+	{
+	public:
+		Trap *beg, *end, **lbeg, *last;
+
+		void cut( coord2d x1, coord2d x2 );
+		void restore( Trap *t );
+		void clip( coord2d x1, coord2d x2, coord2d y11, coord2d y12, coord2d y21, coord2d y22, Monotone *poly );
+		void addbeg( Monotone *poly );
+		void addend( Monotone *poly );
+	};
+
+} // namespace boom
+
+	// splits [a1,a2] with ratio b1:b2
+#define splitab(a1,a2,b1,b2) (((a1)*(b2)+(a2)*(b1))/((b1)+(b2)))
 
 
-Tmap_item::Tmap_item()
-{
-  options = 0;
-}
-
-// saves the map item to the current file
-void Tmap_item::save()
-{
-  wrchar( options );
-}
-
-// loads the map item from the current file
-bool Tmap_item::load()
-{
-  options = rdchar();
-  return true;
-}
-
-//marks the map item as 'dirty'
-void Tmap_item::dirty()
-{
-  options |= miDIRTY;
-}
+#endif

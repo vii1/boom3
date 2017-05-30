@@ -396,11 +396,11 @@ void rotateyxpn(coord2d *vx,coord2d *vy,int n)
   }
 }
 
-// draws a Tmonotone
-void drawmp(Tmonotone *mp)
+// draws a Monotone
+void drawmp(Monotone *mp)
 {
   coord2d x=mp->xmin;
-  Ttrap *t;
+  Trap *t;
   coord2d vx[4];
   coord2d vy[4];
 

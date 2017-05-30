@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Twall.cpp - class Twall implementation                             //
+//   Wall.cpp - class Wall implementation                             //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,7 +10,7 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#define _TWALL_CPP
+#define _WALL_CPP
 #include "boom.h"
 #include "draw.h"
 #include "read.h"
@@ -18,8 +18,8 @@
 
 #include <stdio.h>
 
-Twall::Twall():
-  Tmap_item()
+Wall::Wall():
+  MapItem()
 {
 #ifdef EDITOR
   next=NULL;
@@ -27,16 +27,16 @@ Twall::Twall():
 }
 
 // saves the wall to the current file
-void Twall::save(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
+void Wall::save(Map *m,Cluster *c,Sector *s,Line *l)
 {
   wrchar(wtWALL);
   savewall();
 }
 
 // saves the wall information
-void Twall::savewall( void )
+void Wall::savewall( void )
 {
-  Tmap_item::save();
+  MapItem::save();
   // writes the texture
   wrlong( texture );
   // writes the heights
@@ -45,9 +45,9 @@ void Twall::savewall( void )
 }
 
 // loads the wall from the current file
-bool Twall::load()
+bool Wall::load()
 {
-  Tmap_item::load();
+  MapItem::load();
   // reads the texture
   texture=rdlong();
 
@@ -58,12 +58,12 @@ bool Twall::load()
 }
 
 // initializes the wall after the loading
-void Twall::postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
+void Wall::postload(Map *m,Cluster *c,Sector *s,Line *l)
 {
 }
 
 // draws the wall
-void Twall::draw(Tmonotone* mp)
+void Wall::draw(Monotone* mp)
 {
   setdrawtexture(texture);
   drawmp(mp);

@@ -13,6 +13,20 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Win32">
+      <UniqueIdentifier>{d5796552-d50e-4106-895e-0a124d0eda55}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Header Files\Direct3D">
+      <UniqueIdentifier>{e5f1e4c4-5253-4efb-aa4f-1e30298a1f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{4604d250-3606-439f-b259-b974fb7469ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Direct3D">
+      <UniqueIdentifier>{4188f36d-cec5-4802-8d66-d1db3e84bcad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\boomd3d\boomd3d.cpp">
@@ -22,22 +36,22 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\win32\Dialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\win32\Win32.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Win32</Filter>
     </ClCompile>
     <ClCompile Include="..\..\direct3d\Display.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Direct3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\direct3d\MipMap.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Direct3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\direct3d\System.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Direct3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\direct3d\Texd3d.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\win32\Win32.cpp">
+      <Filter>Source Files\Win32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,22 +67,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\win32\Dialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\win32\Win32.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Win32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\direct3d\Display.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Direct3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\direct3d\MipMap.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Direct3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\direct3d\System.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Direct3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\direct3d\Texd3d.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\win32\Win32.h">
+      <Filter>Header Files\Win32</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

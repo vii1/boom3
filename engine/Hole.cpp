@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Thole.cpp - class Thole implementation                             //
+//   Hole.cpp - class Hole implementation                             //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -15,20 +15,20 @@
 #include "read.h"
 #include "write.h"
 
-Thole::Thole():
-  Twall()
+Hole::Hole():
+  Wall()
 {
 }
 
 // saves the hole to the current file
-void Thole::save(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
+void Hole::save(Map *m,Cluster *c,Sector *s,Line *l)
 {
   wrchar(wtHOLE);
   savewall();
   // writes the index of the target sector
 #ifdef EDITOR
   int si;
-  Tsector *s0;
+  Sector *s0;
   for (si=0,s0=c->sectors;s0!=sector;si++,NEXTSECTOR(s0));
   wrlong(si);
 #else
@@ -37,21 +37,21 @@ void Thole::save(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
 }
 
 // loads the hole from the current file
-bool Thole::load()
+bool Hole::load()
 {
-  Twall::load();
+  Wall::load();
   // reads the index of the target sector
   *(long *)&sector=rdlong();
   return true;
 }
 
 // initializes the hole after the loading
-void Thole::postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l)
+void Hole::postload(Map *m,Cluster *c,Sector *s,Line *l)
 {
   // converts sector index to sector pointer
 #ifdef EDITOR
   int si;
-  Tsector *s0;
+  Sector *s0;
   for (si=0,s0=c->sectors;si<*(long *)&sector;si++,NEXTSECTOR(s0));
   sector=s0;
 #else

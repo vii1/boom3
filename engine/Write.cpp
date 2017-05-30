@@ -23,48 +23,55 @@
 #endif
 #endif
 
-static int fd;
+namespace boom {
 
-// opens a file for writting
-void write_start( char *fn )
-{
-  fd=open(fn,O_RDWR|O_CREAT|O_BINARY,S_IRWXU);
-}
+	static int fd;
 
-// closes the current file
-bool write_end()
-{
-  close(fd);
-  fd=-1;
-  return true;
-}
+	// opens a file for writting
+	void write_start( char *fn )
+	{
+		fd = open( fn, O_RDWR | O_CREAT | O_BINARY, S_IRWXU );
+	}
 
-// writes size bytes from buf to the current file
-void wrbuf( void *buf, unsigned size )
-{
-  write(fd,buf,size);
-}
+	// closes the current file
+	bool write_end()
+	{
+		close( fd );
+		fd = -1;
+		return true;
+	}
 
-// writes a 4 byte integer
-void wrlong( long buf )
-{
-  write(fd, &buf, sizeof(buf) );
-}
+	// writes size bytes from buf to the current file
+	void wrbuf( void *buf, unsigned size )
+	{
+		write( fd, buf, size );
+	}
 
-// writes a 2 byte integer
-void wrshort( short buf )
-{
-  write(fd, &buf, sizeof(buf) );
-}
+	// writes a 4 byte integer
+	void wrlong( long buf )
+	{
+		LE_int32 buf2 = buf;
+		write( fd, &buf2, sizeof( buf2 ) );
+	}
 
-// writes a 1 byte integer
-void wrchar( char buf )
-{
-  write(fd, &buf, sizeof(buf) );
-}
+	// writes a 2 byte integer
+	void wrshort( short buf )
+	{
+		LE_int16 buf2 = buf;
+		write( fd, &buf2, sizeof( buf2 ) );
+	}
 
-// writes a float
-void wrfloat( float buf )
-{
-  write(fd, &buf, sizeof(buf) );
-}
+	// writes a 1 byte integer
+	void wrchar( char buf )
+	{
+		write( fd, &buf, sizeof( buf ) );
+	}
+
+	// writes a float
+	void wrfloat( float buf )
+	{
+		LE_float buf2 = buf;
+		write( fd, &buf2, sizeof( buf2 ) );
+	}
+
+} // namespace

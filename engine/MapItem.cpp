@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   types.h - basic type and macro definitions                         //
+//   Tmapitem.cpp - class MapItem implementation                      //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,39 +10,29 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _BOOM_TYPES_H
-#define _BOOM_TYPES_H
-
-#include "endian.h"
-//#pragma warning( disable: 4244 )
-//#pragma warning( disable: 4305 )
+#define _MAPITEM_CPP
+#include "MapItem.h"
+#include "read.h"
+#include "write.h"
 
 namespace boom {
-	////////////////////////////////////////////////////////////////////////////
 
-	//general typedefs
-	typedef unsigned char byte;
-	typedef unsigned short word;
-	typedef unsigned long dword;
-	typedef float angle;
-	typedef double coord3d;
-	typedef float coord2d;
-
-	static_assert(sizeof( dword ) == 4, "sizeof(dword)==4");
-
-	////////////////////////////////////////////////////////////////////////////
-
-	//general struct definitions
-	struct Tvertex
+	// saves the map item to the current file
+	void MapItem::save()
 	{
-		coord3d x, y;
-	};
+		wrchar( options );
+	}
 
-	struct Tvector
+	// loads the map item from the current file
+	bool MapItem::load()
 	{
-		coord3d x, y, z;
-	};
+		options = rdchar();
+		return true;
+	}
 
-} // namespace
-
-#endif _BOOM_TYPES_H_
+	//marks the map item as 'dirty'
+	void MapItem::dirty()
+	{
+		options |= kOptionDirty;
+	}
+}

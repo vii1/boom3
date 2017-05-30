@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tmapitem.h - class Tmap_item interface                             //
+//   MapItem.h - class MapItem interface                             //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,8 +10,8 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _TMAPITEM_H
-#define _TMAPITEM_H
+#ifndef _BOOM_MAPITEM_H
+#define _BOOM_MAPITEM_H
 
 #include "types.h"
 
@@ -81,26 +81,25 @@
 }
 #endif
 
-enum
-{
-  miDIRTY = 0x80, //The item has changed and should be saved
-};
+namespace boom {
 
-// Tmap_item is the root of the class hierarchy
-class Tmap_item
-{
-public:
-  byte options; //miXXXX
+	// MapItem is the root of the class hierarchy
+	class MapItem
+	{
+	public:
+		static const int kOptionDirty = 0x80; //The item has changed and should be saved
 
-  Tmap_item();
+		byte options = 0;
 
-  // saves the map item to the current file
-  void save();
-  // loads the map item from the current file
-  bool load();
+		MapItem() = default;
 
-  //marks the map item as 'dirty'
-  void dirty();
-};
+		// saves the map item to the current file
+		void save();
+		// loads the map item from the current file
+		bool load();
 
-#endif
+		//marks the map item as 'dirty'
+		void dirty();
+	};
+} // namespace
+#endif // _BOOM_MAPITEM_H_

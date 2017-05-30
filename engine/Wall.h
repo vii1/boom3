@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Twall.h - class Twall interface                                    //
+//   Wall.h - class Wall interface                                    //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -24,28 +24,28 @@ enum
 };
 
 // basic class for the walls in the engine
-class Twall: public Tmap_item
+class Wall: public MapItem
 {
 public:
   int texture;
   coord3d z1c,z2c;  // heights of the top left and top right corners of the wall
 
-  Twall();
+  Wall();
 
   // saves the wall to the current file
-  virtual void save(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
+  virtual void save(Map *m,Cluster *c,Sector *s,Line *l);
   // saves the wall information
   void savewall( void );
   // loads the wall from the current file
   virtual bool load();
   // initializes the wall after the loading
-  virtual void postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
+  virtual void postload(Map *m,Cluster *c,Sector *s,Line *l);
 
   // draws the wall
-  virtual void draw(Tmonotone *fp);
+  virtual void draw(Monotone *fp);
 
 #ifdef EDITOR
-  Twall *next;
+  Wall *next;
 #endif
 };
 

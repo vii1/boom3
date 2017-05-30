@@ -20,17 +20,17 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{6751E84E-D701-4366-8631-E70A7A0F65FF}</ProjectGuid>
+    <ProjectGuid>{8C4EAEB5-EA78-48F9-98BA-14E9537AA324}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>boom3engine</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <RootNamespace>boom3engineSDL2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -76,8 +76,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;DIRECT_3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\direct3d;$(SolutionDir)..\Win32</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\common</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,54 +125,63 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\endian.h" />
     <ClInclude Include="..\..\engine\Boom.h" />
     <ClInclude Include="..\..\engine\Collide.h" />
     <ClInclude Include="..\..\engine\Draw.h" />
     <ClInclude Include="..\..\engine\Geom.h" />
     <ClInclude Include="..\..\engine\Player.h" />
     <ClInclude Include="..\..\engine\Read.h" />
-    <ClInclude Include="..\..\engine\Tclip.h" />
-    <ClInclude Include="..\..\engine\Tcluster.h" />
-    <ClInclude Include="..\..\engine\Thole.h" />
-    <ClInclude Include="..\..\engine\Tline.h" />
-    <ClInclude Include="..\..\engine\Tmap.h" />
-    <ClInclude Include="..\..\engine\Tmapitem.h" />
-    <ClInclude Include="..\..\engine\Tportal.h" />
-    <ClInclude Include="..\..\engine\Tsector.h" />
-    <ClInclude Include="..\..\engine\Ttexture.h" />
-    <ClInclude Include="..\..\engine\Ttrap.h" />
-    <ClInclude Include="..\..\engine\Twall.h" />
+    <ClInclude Include="..\..\engine\Clip.h" />
+    <ClInclude Include="..\..\engine\Cluster.h" />
+    <ClInclude Include="..\..\engine\Hole.h" />
+    <ClInclude Include="..\..\engine\Line.h" />
+    <ClInclude Include="..\..\engine\Map.h" />
+    <ClInclude Include="..\..\engine\MapItem.h" />
+    <ClInclude Include="..\..\engine\Portal.h" />
+    <ClInclude Include="..\..\engine\Sector.h" />
+    <ClInclude Include="..\..\engine\Texture.h" />
+    <ClInclude Include="..\..\engine\Trap.h" />
+    <ClInclude Include="..\..\engine\Wall.h" />
     <ClInclude Include="..\..\engine\Types.h" />
     <ClInclude Include="..\..\engine\Write.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\engine\Boom.cpp" />
     <ClCompile Include="..\..\engine\Collide.cpp" />
     <ClCompile Include="..\..\engine\Draw.cpp" />
     <ClCompile Include="..\..\engine\Geom.cpp" />
     <ClCompile Include="..\..\engine\Player.cpp" />
     <ClCompile Include="..\..\engine\Read.cpp" />
-    <ClCompile Include="..\..\engine\Tclip.cpp" />
-    <ClCompile Include="..\..\engine\Tcluster.cpp" />
-    <ClCompile Include="..\..\engine\Thole.cpp" />
-    <ClCompile Include="..\..\engine\Tline.cpp" />
-    <ClCompile Include="..\..\engine\Tmap.cpp" />
-    <ClCompile Include="..\..\engine\Tmapitem.cpp" />
-    <ClCompile Include="..\..\engine\Tportal.cpp" />
-    <ClCompile Include="..\..\engine\Tsector.cpp" />
-    <ClCompile Include="..\..\engine\Ttexture.cpp" />
-    <ClCompile Include="..\..\engine\Ttrap.cpp" />
-    <ClCompile Include="..\..\engine\Twall.cpp" />
+    <ClCompile Include="..\..\engine\Clip.cpp" />
+    <ClCompile Include="..\..\engine\Cluster.cpp" />
+    <ClCompile Include="..\..\engine\Hole.cpp" />
+    <ClCompile Include="..\..\engine\Line.cpp" />
+    <ClCompile Include="..\..\engine\Map.cpp" />
+    <ClCompile Include="..\..\engine\MapItem.cpp" />
+    <ClCompile Include="..\..\engine\Portal.cpp" />
+    <ClCompile Include="..\..\engine\Sector.cpp" />
+    <ClCompile Include="..\..\engine\Texture.cpp" />
+    <ClCompile Include="..\..\engine\Trap.cpp" />
+    <ClCompile Include="..\..\engine\Wall.cpp" />
     <ClCompile Include="..\..\engine\Write.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\sdl2.redist.2.0.5\build\native\sdl2.redist.targets" Condition="Exists('..\packages\sdl2.redist.2.0.5\build\native\sdl2.redist.targets')" />
+    <Import Project="..\packages\sdl2.2.0.5\build\native\sdl2.targets" Condition="Exists('..\packages\sdl2.2.0.5\build\native\sdl2.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\sdl2.redist.2.0.5\build\native\sdl2.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.redist.2.0.5\build\native\sdl2.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2.2.0.5\build\native\sdl2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.2.0.5\build\native\sdl2.targets'))" />
+  </Target>
 </Project>

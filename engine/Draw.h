@@ -13,8 +13,8 @@
 #ifndef _DRAW_H
 #define _DRAW_H
 
-#include "Ttexture.h"
-#include "Ttrap.h"
+#include "Texture.h"
+#include "Trap.h"
 
 
 // sets the data for the perspective correct texture mapping
@@ -24,8 +24,8 @@
 void setdrawdata(Tvector *a,Tvector *p,Tvector *q);
 // sets the current texture
 void setdrawtexture(int txt);
-// draws a Tmonotone
-void drawmp(Tmonotone *mp);
+// draws a Monotone
+void drawmp(Monotone *mp);
 
 // initializes the software renderer
 void draw_init(byte *buffer,int w,int h);

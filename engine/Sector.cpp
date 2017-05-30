@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tsector.cpp - class Tsector implementation                         //
+//   Sector.cpp - class Sector implementation                         //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -24,16 +24,16 @@
 #include <stdio.h>
 
 
-Tsector::Tsector():
-  Tmap_item()
+Sector::Sector():
+  MapItem()
 {
   lines = NULL;
 }
 
 // saves the sector to the current file
-void Tsector::save(Tmap *m,Tcluster *c)
+void Sector::save(Map *m,Cluster *c)
 {
-  Tmap_item::save();
+  MapItem::save();
 
   // writes floor and ceiling info
   wrfloat( zfa );
@@ -48,15 +48,15 @@ void Tsector::save(Tmap *m,Tcluster *c)
 
   // writes all the lines
   int i;
-  Tline *l;
+  Line *l;
   for (i=0,l=lines;i<linesnum;NEXTLINE(l),i++)
     l->save(m,c,this);
 }
 
 // loads the sector from the current file
-bool Tsector::load()
+bool Sector::load()
 {
-  Tmap_item::load();
+  MapItem::load();
 
   // reads floor and ceiling info
   zfa=rdfloat();
@@ -71,16 +71,16 @@ bool Tsector::load()
   // reads all the lines
   int n=rdlong();
   if (n==0) return false;
-  CONSTRUCT_AND_LOAD_ARRAY(lines,Tline,n);
+  CONSTRUCT_AND_LOAD_ARRAY(lines,Line,n);
   linesnum=n;
   return true;
 }
 
 // initializes the sector after the loading
-void Tsector::postload(Tmap *m,Tcluster *c)
+void Sector::postload(Map *m,Cluster *c)
 {
   // calculates the bounding box
-  Tline *cn, *l;
+  Line *cn, *l;
   int i;
   minx=1000000;
   maxx=-1000000;
@@ -106,11 +106,11 @@ void Tsector::postload(Tmap *m,Tcluster *c)
 }
 
 // unloads the sector (releases all resources allocated by load())
-void Tsector::unload()
+void Sector::unload()
 {
   // unloads all the lines
   if (lines) {
-    Tline *l=lines;
+    Line *l=lines;
     for (int i=0;i<linesnum;i++,NEXTLINE(l))
       l->unload();
     DESTRUCT_ARRAY(lines);
@@ -120,13 +120,13 @@ void Tsector::unload()
 #define EPS 0.00001 // to fix problems with precision
 
 // creates the contours from the lines of the sector
-int Tsector::build_contours(Tcont *c)
+int Sector::build_contours(Cont *c)
 {
-  Tline *l=lines,*last;
+  Line *l=lines,*last;
   int i=0;
   coord3d x1,z1,x2,z2;
   coord2d sx1,sx2=0;
-  Tcont *c1=c;
+  Cont *c1=c;
   int cn=0;
 
   // checks each line in the sector
@@ -262,7 +262,7 @@ int Tsector::build_contours(Tcont *c)
 }
 
 // fills polygon fp with the texture of the floor
-void Tsector::draw_floor(Tmonotone *mp)
+void Sector::draw_floor(Monotone *mp)
 {
   // sets the data for the texture mapping
   Tvector a={-view.x*cosz-view.y*sinz,view.x*sinz-view.y*cosz,-zfc+view.z};
@@ -279,7 +279,7 @@ void Tsector::draw_floor(Tmonotone *mp)
 }
 
 // fills polygon fp with the texture of the ceiling
-void Tsector::draw_ceiling(Tmonotone *mp)
+void Sector::draw_ceiling(Monotone *mp)
 {
   // sets the data for the texture mapping
   Tvector a={-view.x*cosz-view.y*sinz,view.x*sinz-view.y*cosz,-zcc+view.z};
@@ -296,30 +296,30 @@ void Tsector::draw_ceiling(Tmonotone *mp)
 }
 
 // returns the height of the floor at point (x,y)
-coord3d Tsector::getzf(coord3d x,coord3d y)
+coord3d Sector::getzf(coord3d x,coord3d y)
 {
   return zfa*x+zfb*y+zfc;
 }
 
 // returns the height of the ceiling at point (x,y)
-coord3d Tsector::getzc(coord3d x,coord3d y)
+coord3d Sector::getzc(coord3d x,coord3d y)
 {
   return zca*x+zcb*y+zcc;
 }
 
 // must be called when the height of the floor or ceiling is changed
-void Tsector::changeheight( void )
+void Sector::changeheight( void )
 {
-  Tline *l;
+  Line *l;
   int li;
   for (l=lines,li=0;li<linesnum;li++,NEXTLINE(l))
     l->changeheight(this,true);
 }
 
 // returns the line with ends v1 and v2
-Tline *Tsector::getline(int v1,int v2)
+Line *Sector::getline(int v1,int v2)
 {
-  Tline *l;
+  Line *l;
   int li;
   for (l=lines,li=0;li<linesnum;li++,NEXTLINE(l))
     if (l->v1==v1 && l->v2==v2) return l;

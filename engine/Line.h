@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tline.h - class Tline interface                                    //
+//   Line.h - class Line interface                                    //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -25,34 +25,34 @@ enum
   wtPORTAL = 3, // a portal (a hole to another cluster)
 };
 
-class Tsector;
+class Sector;
 
 #define MAX_WPL 10  // maximum walls per line
 
-// Tline contains all the information for one line in the sector
-class Tline: public Tmap_item
+// Line contains all the information for one line in the sector
+class Line: public MapItem
 {
 public:
-  Twall **walls;  // walls in the sector
+  Wall **walls;  // walls in the sector
   int wallsnum;  // number of the walls in the sector
 
   int v1,v2;   // first and second vertex of the line
   coord2d len;    // length of the line
 
-  Tline();
+  Line();
 
   // saves the line to the current file
-  void save(Tmap *m,Tcluster *c,Tsector *s);
+  void save(Map *m,Cluster *c,Sector *s);
   // loads the line from the current file
   bool load();
   // unloads the line (releases all resources allocated by load())
   void unload();
   // initializes the line after the loading
-  void postload(Tmap *m,Tcluster *c,Tsector *s);
+  void postload(Map *m,Cluster *c,Sector *s);
   // this is called by the sector when the height is changed
-  void changeheight(Tsector *s,bool wave);
+  void changeheight(Sector *s,bool wave);
   // draws the line
-  void draw(Tsector *owner);
+  void draw(Sector *owner);
 
   // checks if the line is last of the contour
   inline bool contour_end()
@@ -61,10 +61,10 @@ public:
   }
 
 #ifdef EDITOR
-  Tline *next,*nextc;
+  Line *next,*nextc;
 
   // returns the next line in the contour
-  inline Tline *next_in_contour()
+  inline Line *next_in_contour()
   {
     return nextc;
   }
@@ -72,7 +72,7 @@ public:
   byte nextc;
 
   // returns the next line in the contour
-  inline Tline *next_in_contour()
+  inline Line *next_in_contour()
   {
     if (contour_end()) return this-nextc;
     else return this+1;
@@ -81,7 +81,7 @@ public:
 
   // implementation of these functions is in collide.cpp
   // checks if l1 has vertex before the line
-  bool before(Tline *l1);
+  bool before(Line *l1);
   // checks the line for collisions
   bool collide(coord3d z,coord3d zf,coord3d zc,double t);
 };

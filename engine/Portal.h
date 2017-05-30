@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Thole.h - class Thole interface                                    //
+//   Portal.h - class Portal interface                                //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,23 +10,28 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _THOLE_H
-#define _THOLE_H
+#ifndef _TPORTAL_H
+#define _TPORTAL_H
 
-// Thole is a wall without texture that leads to another sector
-class Thole: public Twall
+#include "Tclip.h"
+
+// Portal is a wall without texture that leads to another cluster
+// it combines the features of hole and clip
+class Portal: public Hole, public Clip
 {
 public:
-  Tsector *sector;  // target sector
+  Cluster *target; // target cluster
 
-  Thole();
+  Portal();
 
-  // saves the hole to the current file
-  virtual void save(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
-  // loads the hole from the current file
+  // saves the portal to the current file
+  virtual void save(Map *m,Cluster *c,Sector *s,Line *l);
+  // loads the portal from the current file
   virtual bool load();
-  // initializes the hole after the loading
-  virtual void postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
+  // initializes the portal after the loading
+  virtual void postload(Map *m,Cluster *c,Sector *s,Line *l);
+  // draws the portal
+  virtual void draw(Monotone *mp);
 };
 
 #endif

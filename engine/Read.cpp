@@ -25,64 +25,64 @@ static int fd;
 // opens a file for reading
 bool read_start( char *fn )
 {
-  fd=open(fn,O_RDONLY|O_BINARY);
-  if (fd==-1) return false;
-  return true;
+	fd = open( fn, O_RDONLY | O_BINARY );
+	if( fd == -1 ) return false;
+	return true;
 }
 
 // closes the current file
 void read_end()
 {
-  if (fd!=-1) close(fd);
-  fd=-1;
+	if( fd != -1 ) close( fd );
+	fd = -1;
 }
 
 // returns the current file pointer
 long read_pos()
 {
-  return tell(fd);
+	return tell( fd );
 }
 
 // skips len bytes
-void skip(unsigned len)
+void skip( unsigned len )
 {
-  lseek(fd,len,SEEK_CUR);
+	lseek( fd, len, SEEK_CUR );
 }
 
 // reads size bytes in buf
 void rdbuf( void *buf, unsigned size )
 {
-  read( fd, buf, size );
+	read( fd, buf, size );
 }
 
 // reads a 4 byte integer
-long rdlong( void )
+long rdlong()
 {
-  long buf;
-  read(fd, &buf, sizeof(buf) );
-  return buf;
+	LE_int32 buf;
+	read( fd, &buf, sizeof( buf ) );
+	return buf;
 }
 
 // reads a 2 byte integer
-short rdshort( void )
+short rdshort()
 {
-  short buf;
-  read(fd, &buf, sizeof(buf) );
-  return buf;
+	LE_int16 buf;
+	read( fd, &buf, sizeof( buf ) );
+	return buf;
 }
 
 // reads a 1 byte integer
-char rdchar( void )
+char rdchar()
 {
-  char buf;
-  read(fd, &buf, sizeof(buf) );
-  return buf;
+	char buf;
+	read( fd, &buf, sizeof( buf ) );
+	return buf;
 }
 
 // reads a float
-float rdfloat( void )
+float rdfloat()
 {
-  float buf;
-  read(fd, &buf, sizeof(buf) );
-  return buf;
+	LE_float buf;
+	read( fd, &buf, sizeof( buf ) );
+	return buf;
 }
