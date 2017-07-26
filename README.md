@@ -1,4 +1,6 @@
 # BOOM3
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fvii1%2Fboom3.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fvii1%2Fboom3?ref=badge_shield)
+
 
 This is a somewhat DOOM-like 3D engine based on the work by Ivaylo Beltchev and Emil Dotchevski.
 
@@ -32,3 +34,6 @@ My intended changes to the original codebase:
   * etc.
 
  I will never make it that far lol. This is just for fun.
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fvii1%2Fboom3.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fvii1%2Fboom3?ref=badge_large)
