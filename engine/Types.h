@@ -13,7 +13,7 @@
 #ifndef _BOOM_TYPES_H
 #define _BOOM_TYPES_H
 
-#include "endian.h"
+#include "../common/endian.h"
 //#pragma warning( disable: 4244 )
 //#pragma warning( disable: 4305 )
 

@@ -13,8 +13,8 @@
 #ifndef _TSECTOR_H
 #define _TSECTOR_H
 
-#include "Ttrap.h"
-#include "Ttexture.h"
+#include "Trap.h"
+#include "Texture.h"
 
 struct Cont;
 

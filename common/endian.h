@@ -1,7 +1,8 @@
 #ifndef _ENDIAN_H_
 #define _ENDIAN_H_
 
-#include "SDL_endian.h"
+#include <SDL2/SDL_endian.h>
+
 #include <type_traits>
 
 namespace endian {
@@ -19,52 +20,82 @@ namespace endian {
 
 	typedef BigEndian NetOrdering;
 
-	template<typename Ordering, typename Type>
-	Type reverse( Type v );
-
-	template<typename Ordering, typename Type>
-	struct WrappedType
-	{
-		WrappedType() = default;
-		WrappedType( Type v ) : _store( reverse( v ) ) {}
-		Type operator Type() const { return reverse( _store ); }
-		Type operator=( Type v ) { _store = reverse( v ); return v; }
-
-	private:
-		Type _store;
-	};
+	//template<typename Ordering, typename Type>
+	//inline Type reverse( Type v ) { return v; }
 
 	//template<typename Type>
 	//typedef WrappedType<ReversedOrdering,Type> ForeignType<Type>;
 	//template<typename Type>
 	//typedef Type NativeType<Type>;
 
-	template<typename Type>
-	inline Type reverse<NativeOrdering>( Type v ) { return v; }
+	/*template<typename T>
+	inline T reverse<ReversedOrdering>( T v )
+	{
+		//return static_cast<Type>(SDL_Swap16( static_cast<Uint16>(v) );
+		return 0;
+	}
 
 	template<>
-	inline float reverse<ReversedOrdering>( float v )
+	inline float reverse<ReversedOrdering, float>( float v )
 	{
 		return SDL_SwapFloat( v );
-	}
+	}*/
 
-	template<typename Type>
-	inline std::enable_if<sizeof( Type ) == 16, Type>::type reverse<ReversedOrdering>( Type v )
-	{
-		return static_cast<Type>( SDL_Swap16( static_cast<Uint16>( v ) );
-	}
-
-	template<typename Type>
-	inline std::enable_if<sizeof( Type ) == 32, Type>::type reverse<ReversedOrdering>( Type v )
+	/*template<typename Type>
+	inline std::enable_if<sizeof( Type ) == 32, Type>::type reverse<ReversedOrdering, Type>( Type v )
 	{
 		return static_cast<Type>(SDL_Swap32( static_cast<Uint32>(v) ));
 	}
 
 	template<typename Type>
-	inline std::enable_if<sizeof( Type ) == 64, Type>::type reverse<ReversedOrdering>( Type v )
+	inline std::enable_if<sizeof( Type ) == 64, Type>::type reverse<ReversedOrdering, Type>( Type v )
 	{
 		return static_cast<Type>(SDL_Swap64( static_cast<Uint32>(v) ));
-	}
+	}*/
+
+	template<typename Ordering, typename Type>
+	struct rev {
+		inline static Type reverse( Type v ) { return v; }
+	};
+
+	template<typename Type>
+	struct rev<ReversedOrdering, Type> {
+		inline static Type reverse( std::enable_if_t<sizeof( Type ) == 16, Type> v )
+		{
+			return static_cast<Type>(SDL_Swap16( static_cast<Uint16>(v) ));
+		}
+		inline static Type reverse( std::enable_if_t<sizeof( Type ) == 32, Type> v )
+		{
+			return static_cast<Type>(SDL_Swap16( static_cast<Uint32>(v) ));
+		}
+		inline static Type reverse( std::enable_if_t<sizeof( Type ) == 64, Type> v )
+		{
+			return static_cast<Type>(SDL_Swap16( static_cast<Uint64>(v) ));
+		}
+	};
+
+	template<>
+	struct rev<ReversedOrdering, float> {
+		inline static float reverse( float v )
+		{
+			return SDL_SwapFloat( v );
+		}
+	};
+
+	template<typename Ordering, typename Type>
+	struct WrappedType {
+		WrappedType() = default;
+		WrappedType( Type v ) : _store( r::reverse( v ) ) {}
+		operator Type() const { return r::reverse( _store ); }
+		Type get() const { return r::reverse( _store ); }
+		Type operator=( Type v ) { _store = r::reverse( v ); return v; }
+		Type raw() const { return _store; }
+
+	private:
+		typedef rev<Ordering, Type> r;
+		Type _store;
+	};
+
 }
 
 typedef endian::WrappedType<endian::LittleEndian, uint16_t> LE_uint16;
