@@ -21,22 +21,22 @@
     <ClCompile Include="..\..\boomd3d\mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\win32\Dialog.cpp">
+    <ClCompile Include="..\..\win32\dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\win32\Win32.cpp">
+    <ClCompile Include="..\..\direct3d\display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\Display.cpp">
+    <ClCompile Include="..\..\direct3d\mipmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\MipMap.cpp">
+    <ClCompile Include="..\..\direct3d\system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\System.cpp">
+    <ClCompile Include="..\..\direct3d\texd3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\Texd3d.cpp">
+    <ClCompile Include="..\..\win32\win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,25 +49,28 @@
     <ClInclude Include="..\..\boomd3d\mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\boomd3d\Resource.h">
+    <ClInclude Include="..\..\win32\dialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\win32\Dialog.h">
+    <ClInclude Include="..\..\direct3d\display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\win32\Win32.h">
+    <ClInclude Include="..\..\direct3d\mipmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\direct3d\Display.h">
+    <ClInclude Include="..\..\boomd3d\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\direct3d\MipMap.h">
+    <ClInclude Include="..\..\direct3d\system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\direct3d\System.h">
+    <ClInclude Include="..\..\direct3d\texd3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\direct3d\Texd3d.h">
+    <ClInclude Include="..\..\win32\win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\win32\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

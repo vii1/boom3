@@ -12,8 +12,8 @@
 
 #define _MOUSE_CPP
 #include "mouse.h"
-#include "win32.h"
-#include "system.h"
+#include "../win32/win32.h"
+#include "../direct3d/system.h"
 #include <dinput.h>
 
 static IDirectInput8 *dinput=NULL;

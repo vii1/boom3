@@ -16,7 +16,7 @@
 #include "write.h"
 #include "geom.h"
 #include "draw.h"
-#include "Tclip.h"
+#include "clip.h"
 
 #include <assert.h>
 #include <malloc.h>

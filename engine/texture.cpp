@@ -11,10 +11,10 @@
 //////////////////////////////////////////////////////////////////////////
 
 #define _TTEXTURE_CPP
-#include "Ttexture.h"
+#include "texture.h"
 
 #ifdef DIRECT_3D
-#include"texd3d.h"
+#include "../direct3d/texd3d.h"
 #endif
 
 #include "read.h"

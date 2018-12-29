@@ -15,7 +15,7 @@
 #include "boom.h"
 #include "geom.h"
 #include "player.h"
-#include "Tclip.h"
+#include "clip.h"
 
 #include <stdio.h>
 #include <math.h>

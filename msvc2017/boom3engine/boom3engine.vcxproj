@@ -43,7 +43,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -85,10 +85,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;DIRECT_3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,64 +125,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\direct3d\Display.h" />
-    <ClInclude Include="..\..\direct3d\MipMap.h" />
-    <ClInclude Include="..\..\direct3d\System.h" />
-    <ClInclude Include="..\..\direct3d\Texd3d.h" />
-    <ClInclude Include="..\..\engine\Boom.h" />
-    <ClInclude Include="..\..\engine\Collide.h" />
-    <ClInclude Include="..\..\engine\Draw.h" />
-    <ClInclude Include="..\..\engine\Geom.h" />
-    <ClInclude Include="..\..\engine\Player.h" />
-    <ClInclude Include="..\..\engine\Read.h" />
-    <ClInclude Include="..\..\engine\Tclip.h" />
-    <ClInclude Include="..\..\engine\Tcluster.h" />
-    <ClInclude Include="..\..\engine\Thole.h" />
-    <ClInclude Include="..\..\engine\Tline.h" />
-    <ClInclude Include="..\..\engine\Tmap.h" />
-    <ClInclude Include="..\..\engine\Tmapitem.h" />
-    <ClInclude Include="..\..\engine\Tportal.h" />
-    <ClInclude Include="..\..\engine\Tsector.h" />
-    <ClInclude Include="..\..\engine\Ttexture.h" />
-    <ClInclude Include="..\..\engine\Ttrap.h" />
-    <ClInclude Include="..\..\engine\Twall.h" />
-    <ClInclude Include="..\..\engine\Types.h" />
-    <ClInclude Include="..\..\engine\Write.h" />
-    <ClInclude Include="..\..\win32\Dialog.h" />
-    <ClInclude Include="..\..\win32\Win32.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\..\direct3d\display.h" />
+    <ClInclude Include="..\..\direct3d\mipmap.h" />
+    <ClInclude Include="..\..\direct3d\system.h" />
+    <ClInclude Include="..\..\direct3d\texd3d.h" />
+    <ClInclude Include="..\..\engine\boom.h" />
+    <ClInclude Include="..\..\engine\collide.h" />
+    <ClInclude Include="..\..\engine\draw.h" />
+    <ClInclude Include="..\..\engine\geom.h" />
+    <ClInclude Include="..\..\engine\player.h" />
+    <ClInclude Include="..\..\engine\read.h" />
+    <ClInclude Include="..\..\engine\clip.h" />
+    <ClInclude Include="..\..\engine\cluster.h" />
+    <ClInclude Include="..\..\engine\hole.h" />
+    <ClInclude Include="..\..\engine\line.h" />
+    <ClInclude Include="..\..\engine\map.h" />
+    <ClInclude Include="..\..\engine\mapitem.h" />
+    <ClInclude Include="..\..\engine\portal.h" />
+    <ClInclude Include="..\..\engine\sector.h" />
+    <ClInclude Include="..\..\engine\texture.h" />
+    <ClInclude Include="..\..\engine\trap.h" />
+    <ClInclude Include="..\..\engine\wall.h" />
+    <ClInclude Include="..\..\engine\types.h" />
+    <ClInclude Include="..\..\engine\write.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\direct3d\Display.cpp" />
-    <ClCompile Include="..\..\direct3d\MipMap.cpp" />
-    <ClCompile Include="..\..\direct3d\System.cpp" />
-    <ClCompile Include="..\..\direct3d\Texd3d.cpp" />
-    <ClCompile Include="..\..\engine\Collide.cpp" />
-    <ClCompile Include="..\..\engine\Draw.cpp" />
-    <ClCompile Include="..\..\engine\Geom.cpp" />
-    <ClCompile Include="..\..\engine\Player.cpp" />
-    <ClCompile Include="..\..\engine\Read.cpp" />
-    <ClCompile Include="..\..\engine\Tclip.cpp" />
-    <ClCompile Include="..\..\engine\Tcluster.cpp" />
-    <ClCompile Include="..\..\engine\Thole.cpp" />
-    <ClCompile Include="..\..\engine\Tline.cpp" />
-    <ClCompile Include="..\..\engine\Tmap.cpp" />
-    <ClCompile Include="..\..\engine\Tmapitem.cpp" />
-    <ClCompile Include="..\..\engine\Tportal.cpp" />
-    <ClCompile Include="..\..\engine\Tsector.cpp" />
-    <ClCompile Include="..\..\engine\Ttexture.cpp" />
-    <ClCompile Include="..\..\engine\Ttrap.cpp" />
-    <ClCompile Include="..\..\engine\Twall.cpp" />
-    <ClCompile Include="..\..\engine\Write.cpp" />
-    <ClCompile Include="..\..\win32\Dialog.cpp" />
-    <ClCompile Include="..\..\win32\Win32.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="..\..\direct3d\display.cpp" />
+    <ClCompile Include="..\..\direct3d\mipmap.cpp" />
+    <ClCompile Include="..\..\direct3d\system.cpp" />
+    <ClCompile Include="..\..\direct3d\texd3d.cpp" />
+    <ClCompile Include="..\..\engine\collide.cpp" />
+    <ClCompile Include="..\..\engine\draw.cpp" />
+    <ClCompile Include="..\..\engine\geom.cpp" />
+    <ClCompile Include="..\..\engine\player.cpp" />
+    <ClCompile Include="..\..\engine\read.cpp" />
+    <ClCompile Include="..\..\engine\clip.cpp" />
+    <ClCompile Include="..\..\engine\cluster.cpp" />
+    <ClCompile Include="..\..\engine\hole.cpp" />
+    <ClCompile Include="..\..\engine\line.cpp" />
+    <ClCompile Include="..\..\engine\map.cpp" />
+    <ClCompile Include="..\..\engine\mapitem.cpp" />
+    <ClCompile Include="..\..\engine\portal.cpp" />
+    <ClCompile Include="..\..\engine\sector.cpp" />
+    <ClCompile Include="..\..\engine\texture.cpp" />
+    <ClCompile Include="..\..\engine\trap.cpp" />
+    <ClCompile Include="..\..\engine\wall.cpp" />
+    <ClCompile Include="..\..\engine\write.cpp" />
+    <ClCompile Include="..\..\win32\dialog.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

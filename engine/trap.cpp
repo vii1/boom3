@@ -11,7 +11,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #define _TTRAP_CPP
-#include "Ttrap.h"
+#include "trap.h"
 
 // different kind of constructors to initialize the object
 Ttrap::Ttrap(coord2d _x2,coord2d _y11,coord2d _y12,coord2d _y21,coord2d _y22)

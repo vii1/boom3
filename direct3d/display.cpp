@@ -13,7 +13,7 @@
 #define _DISPLAY_CPP
 #include "display.h"
 #include "system.h"
-#include "win32.h"
+#include "../win32/win32.h"
 
 #define FAIL(msg) { on_error=msg; goto error; };
 static DisplayDriverDesc __drivers[_DISPLAY_MAX_DRIVERS];
@@ -26,7 +26,6 @@ static bool display_devices_enumerate();
 static bool display_modes_enumerate();
 
 ////////////////////////////////////////////////////////////////////////////
-
 static BOOL WINAPI enumerate_drivers_callback( GUID *lpGUID, LPSTR description, LPSTR name, LPVOID param )
 {
   memset( &__drivers[__ndrivers], 0, sizeof(__drivers[__ndrivers]) );

@@ -14,8 +14,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // common dialog boxes
-
-UINT APIENTRY OFNhook( HWND hdlg,UINT uiMsg,WPARAM wParam,LPARAM lParam)
+UINT_PTR CALLBACK OFNhook( HWND hdlg,UINT uiMsg,WPARAM wParam,LPARAM lParam)
 {
   if (uiMsg==WM_INITDIALOG) {
     hdlg=GetParent(hdlg);
@@ -107,7 +106,7 @@ bool choosecolor(COLORREF *color)
 
 static DLGPROC currentdlgproc;
 
-static BOOL CALLBACK ModalDialogProc(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam)
+static INT_PTR CALLBACK ModalDialogProc(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam)
 {
   currentDlg=hwndDlg;
   return currentdlgproc(hwndDlg,uMsg,wParam,lParam);

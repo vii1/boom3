@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   draw.h - low level rendering interface                             //
+//   Tmapitem.cpp - class Tmap_item implementation                      //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,26 +10,32 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _DRAW_H
-#define _DRAW_H
+#define _TMAPITEM_CPP
+#include "mapitem.h"
+#include "read.h"
+#include "write.h"
 
-#include "Ttexture.h"
-#include "Ttrap.h"
 
+Tmap_item::Tmap_item()
+{
+  options = 0;
+}
 
-// sets the data for the perspective correct texture mapping
-// a is from point from a polygon with (u,v)=(0,0)
-// p is a vector in the polygon plane along u
-// q is a vector in the polygon plane along v
-void setdrawdata(Tvector *a,Tvector *p,Tvector *q);
-// sets the current texture
-void setdrawtexture(int txt);
-// draws a Tmonotone
-void drawmp(Tmonotone *mp);
+// saves the map item to the current file
+void Tmap_item::save()
+{
+  wrchar( options );
+}
 
-// initializes the software renderer
-void draw_init(byte *buffer,int w,int h);
-// frees the allocated memory
-void draw_done( void );
+// loads the map item from the current file
+bool Tmap_item::load()
+{
+  options = rdchar();
+  return true;
+}
 
-#endif
+//marks the map item as 'dirty'
+void Tmap_item::dirty()
+{
+  options |= miDIRTY;
+}

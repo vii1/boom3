@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tmapitem.cpp - class Tmap_item implementation                      //
+//   boom.h - includes all class definitions in the correct order       //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,32 +10,27 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#define _TMAPITEM_CPP
-#include "Tmapitem.h"
-#include "read.h"
-#include "write.h"
+#ifndef _BOOM_H
+#define _BOOM_H
 
+// define EDITOR to use linked list structures instead of arrays
+// define DIRECT_3D for direct 3d projects
 
-Tmap_item::Tmap_item()
-{
-  options = 0;
-}
+class Tmap;
+class Tcluster;
+class Tsector;
+class Tline;
+class Twall;
+class Thole;
+class Tportal;
 
-// saves the map item to the current file
-void Tmap_item::save()
-{
-  wrchar( options );
-}
+#include "mapitem.h"
+#include "map.h"
+#include "cluster.h"
+#include "sector.h"
+#include "line.h"
+#include "wall.h"
+#include "hole.h"
+#include "portal.h"
 
-// loads the map item from the current file
-bool Tmap_item::load()
-{
-  options = rdchar();
-  return true;
-}
-
-//marks the map item as 'dirty'
-void Tmap_item::dirty()
-{
-  options |= miDIRTY;
-}
+#endif

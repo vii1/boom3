@@ -17,7 +17,7 @@
 #include <fcntl.h>
 
 #ifdef _MSC_VER
-#include <sys\stat.h>
+#include <sys/stat.h>
 #ifndef S_IRWXU
 #define S_IRWXU _S_IREAD | _S_IWRITE
 #endif

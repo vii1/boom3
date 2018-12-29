@@ -14,7 +14,7 @@
 #define _CLIP_H
 
 #include "types.h"
-#include "Ttrap.h"
+#include "trap.h"
 
 // Tclip is a Tmonotone that can clip trapezoids with itself  
 class Tclip: public Tmonotone

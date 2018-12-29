@@ -15,159 +15,141 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="..\..\engine\boom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="..\..\engine\collide.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Boom.h">
+    <ClInclude Include="..\..\direct3d\display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Collide.h">
+    <ClInclude Include="..\..\engine\draw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Draw.h">
+    <ClInclude Include="..\..\engine\geom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Geom.h">
+    <ClInclude Include="..\..\direct3d\mipmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Player.h">
+    <ClInclude Include="..\..\engine\player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Read.h">
+    <ClInclude Include="..\..\engine\read.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tclip.h">
+    <ClInclude Include="..\..\direct3d\system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tcluster.h">
+    <ClInclude Include="..\..\engine\clip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Thole.h">
+    <ClInclude Include="..\..\engine\cluster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tline.h">
+    <ClInclude Include="..\..\direct3d\texd3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tmap.h">
+    <ClInclude Include="..\..\engine\hole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tmapitem.h">
+    <ClInclude Include="..\..\engine\line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tportal.h">
+    <ClInclude Include="..\..\engine\map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Tsector.h">
+    <ClInclude Include="..\..\engine\mapitem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Ttexture.h">
+    <ClInclude Include="..\..\engine\portal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Ttrap.h">
+    <ClInclude Include="..\..\engine\sector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Twall.h">
+    <ClInclude Include="..\..\engine\texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Types.h">
+    <ClInclude Include="..\..\engine\trap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\engine\Write.h">
+    <ClInclude Include="..\..\engine\wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\direct3d\Display.h">
+    <ClInclude Include="..\..\engine\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\direct3d\MipMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\direct3d\System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\direct3d\Texd3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\win32\Dialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\win32\Win32.h">
+    <ClInclude Include="..\..\engine\write.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="..\..\engine\collide.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Collide.cpp">
+    <ClCompile Include="..\..\win32\dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Draw.cpp">
+    <ClCompile Include="..\..\direct3d\display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Geom.cpp">
+    <ClCompile Include="..\..\engine\draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Player.cpp">
+    <ClCompile Include="..\..\engine\geom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Read.cpp">
+    <ClCompile Include="..\..\direct3d\mipmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tclip.cpp">
+    <ClCompile Include="..\..\engine\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tcluster.cpp">
+    <ClCompile Include="..\..\engine\read.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Thole.cpp">
+    <ClCompile Include="..\..\direct3d\system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tline.cpp">
+    <ClCompile Include="..\..\engine\clip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tmap.cpp">
+    <ClCompile Include="..\..\engine\cluster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tmapitem.cpp">
+    <ClCompile Include="..\..\direct3d\texd3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tportal.cpp">
+    <ClCompile Include="..\..\engine\hole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Tsector.cpp">
+    <ClCompile Include="..\..\engine\line.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Ttexture.cpp">
+    <ClCompile Include="..\..\engine\map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Ttrap.cpp">
+    <ClCompile Include="..\..\engine\mapitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Twall.cpp">
+    <ClCompile Include="..\..\engine\portal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\engine\Write.cpp">
+    <ClCompile Include="..\..\engine\sector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\Display.cpp">
+    <ClCompile Include="..\..\engine\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\MipMap.cpp">
+    <ClCompile Include="..\..\engine\trap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\System.cpp">
+    <ClCompile Include="..\..\engine\wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\direct3d\Texd3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\win32\Dialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\win32\Win32.cpp">
+    <ClCompile Include="..\..\engine\write.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

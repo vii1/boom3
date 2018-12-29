@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   boom.h - includes all class definitions in the correct order       //
+//   Tportal.h - class Tportal interface                                //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,27 +10,28 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _BOOM_H
-#define _BOOM_H
+#ifndef _TPORTAL_H
+#define _TPORTAL_H
 
-// define EDITOR to use linked list structures instead of arrays
-// define DIRECT_3D for direct 3d projects
+#include "clip.h"
 
-class Tmap;
-class Tcluster;
-class Tsector;
-class Tline;
-class Twall;
-class Thole;
-class Tportal;
+// Tportal is a wall without texture that leads to another cluster
+// it combines the features of hole and clip
+class Tportal: public Thole, public Tclip
+{
+public:
+  Tcluster *target; // target cluster
 
-#include "Tmapitem.h"
-#include "Tmap.h"
-#include "Tcluster.h"
-#include "Tsector.h"
-#include "Tline.h"
-#include "Twall.h"
-#include "Thole.h"
-#include "Tportal.h"
+  Tportal();
+
+  // saves the portal to the current file
+  virtual void save(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
+  // loads the portal from the current file
+  virtual bool load();
+  // initializes the portal after the loading
+  virtual void postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
+  // draws the portal
+  virtual void draw(Tmonotone *mp);
+};
 
 #endif

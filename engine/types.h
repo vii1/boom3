@@ -13,15 +13,17 @@
 #ifndef _TYPES_H
 #define _TYPES_H
 
-#pragma warning( disable: 4244 )
-#pragma warning( disable: 4305 )
+#include <cstdint>
+
+//#pragma warning( disable: 4244 )
+//#pragma warning( disable: 4305 )
 
 ////////////////////////////////////////////////////////////////////////////
 
 //general typedefs
-typedef unsigned char byte;
-typedef unsigned short word;
-typedef unsigned long dword;
+typedef uint8_t byte;
+typedef uint16_t word;
+typedef uint32_t dword;
 typedef float angle;
 typedef double coord3d;
 typedef float coord2d;

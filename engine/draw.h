@@ -2,7 +2,7 @@
 //                                                                      //
 //   BOOM 2 Engine                                                      //
 //                                                                      //
-//   Tportal.h - class Tportal interface                                //
+//   draw.h - low level rendering interface                             //
 //                                                                      //
 //   by Ivaylo Beltchev                                                 //
 //   e-mail: ivob@geocities.com                                         //
@@ -10,28 +10,26 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef _TPORTAL_H
-#define _TPORTAL_H
+#ifndef _DRAW_H
+#define _DRAW_H
 
-#include "Tclip.h"
+#include "texture.h"
+#include "trap.h"
 
-// Tportal is a wall without texture that leads to another cluster
-// it combines the features of hole and clip
-class Tportal: public Thole, public Tclip
-{
-public:
-  Tcluster *target; // target cluster
 
-  Tportal();
+// sets the data for the perspective correct texture mapping
+// a is from point from a polygon with (u,v)=(0,0)
+// p is a vector in the polygon plane along u
+// q is a vector in the polygon plane along v
+void setdrawdata(Tvector *a,Tvector *p,Tvector *q);
+// sets the current texture
+void setdrawtexture(int txt);
+// draws a Tmonotone
+void drawmp(Tmonotone *mp);
 
-  // saves the portal to the current file
-  virtual void save(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
-  // loads the portal from the current file
-  virtual bool load();
-  // initializes the portal after the loading
-  virtual void postload(Tmap *m,Tcluster *c,Tsector *s,Tline *l);
-  // draws the portal
-  virtual void draw(Tmonotone *mp);
-};
+// initializes the software renderer
+void draw_init(byte *buffer,int w,int h);
+// frees the allocated memory
+void draw_done( void );
 
 #endif

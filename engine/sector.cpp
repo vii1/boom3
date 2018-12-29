@@ -14,7 +14,7 @@
 #include "boom.h"
 #include "draw.h"
 #include "geom.h"
-#include "Tclip.h"
+#include "clip.h"
 #include "read.h"
 #include "write.h"
 

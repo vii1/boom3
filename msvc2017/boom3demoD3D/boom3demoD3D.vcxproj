@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -88,7 +88,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;DIRECTDRAW_VERSION=0x0600;DIRECT3D_VERSION=0x0600;DIRECT_3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DIRECT_3D;WIN32;_DEBUG;_WINDOWS;DIRECTDRAW_VERSION=0x0600;DIRECT3D_VERSION=0x0600;DIRECT_3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\win32;$(SolutionDir)..\engine;$(SolutionDir)..\direct3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -102,10 +102,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DIRECT_3D;WIN32;_DEBUG;_WINDOWS;DIRECTDRAW_VERSION=0x0600;DIRECT3D_VERSION=0x0600;DIRECT_3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>comctl32.lib;winmm.lib;d3d9.lib;dxguid.lib;ddraw.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,25 +144,26 @@
   <ItemGroup>
     <ClCompile Include="..\..\boomd3d\boomd3d.cpp" />
     <ClCompile Include="..\..\boomd3d\mouse.cpp" />
-    <ClCompile Include="..\..\direct3d\Display.cpp" />
-    <ClCompile Include="..\..\direct3d\MipMap.cpp" />
-    <ClCompile Include="..\..\direct3d\System.cpp" />
-    <ClCompile Include="..\..\direct3d\Texd3d.cpp" />
-    <ClCompile Include="..\..\win32\Dialog.cpp" />
-    <ClCompile Include="..\..\win32\Win32.cpp" />
+    <ClCompile Include="..\..\direct3d\display.cpp" />
+    <ClCompile Include="..\..\direct3d\mipmap.cpp" />
+    <ClCompile Include="..\..\direct3d\system.cpp" />
+    <ClCompile Include="..\..\direct3d\texd3d.cpp" />
+    <ClCompile Include="..\..\win32\dialog.cpp" />
+    <ClCompile Include="..\..\win32\win32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\boomd3d\boomd3d.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\boomd3d\mouse.h" />
-    <ClInclude Include="..\..\boomd3d\Resource.h" />
-    <ClInclude Include="..\..\direct3d\Display.h" />
-    <ClInclude Include="..\..\direct3d\MipMap.h" />
-    <ClInclude Include="..\..\direct3d\System.h" />
-    <ClInclude Include="..\..\direct3d\Texd3d.h" />
-    <ClInclude Include="..\..\win32\Dialog.h" />
-    <ClInclude Include="..\..\win32\Win32.h" />
+    <ClInclude Include="..\..\boomd3d\resource.h" />
+    <ClInclude Include="..\..\direct3d\display.h" />
+    <ClInclude Include="..\..\direct3d\mipmap.h" />
+    <ClInclude Include="..\..\direct3d\system.h" />
+    <ClInclude Include="..\..\direct3d\texd3d.h" />
+    <ClInclude Include="..\..\win32\dialog.h" />
+    <ClInclude Include="..\..\win32\stdafx.h" />
+    <ClInclude Include="..\..\win32\win32.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\boom3engine\boom3engine.vcxproj">

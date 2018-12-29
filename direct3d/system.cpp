@@ -12,7 +12,7 @@
 
 #define _SYSTEM_CPP
 #include "system.h"
-#include "win32.h"
+#include "../win32/win32.h"
 #include <stdio.h>
 #include <stdlib.h>
 

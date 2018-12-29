@@ -10,14 +10,14 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#include "boom.h"
-#include "win32.h"
-#include "dialog.h"
-#include "system.h"
-#include "display.h"
+#include "../engine/boom.h"
+#include "../win32/win32.h"
+#include "../win32/dialog.h"
+#include "../direct3d/system.h"
+#include "../direct3d/display.h"
 #include "mouse.h"
-#include "player.h"
-#include "geom.h"
+#include "../engine/player.h"
+#include "../engine/geom.h"
 #include "resource.h"
 #include <stdio.h>
 
@@ -167,7 +167,7 @@ static void changedriver(int d)
   cb_setcurrent(IDC_MODE,0);
 }
 
-BOOL CALLBACK SelectProc(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam)
+INT_PTR CALLBACK SelectProc(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lParam)
 {
   switch (uMsg) {
     case WM_INITDIALOG:

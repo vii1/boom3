@@ -13,8 +13,8 @@
 #ifndef _TWALL_H
 #define _TWALL_H
 
-#include "Ttrap.h"
-#include "Ttexture.h"
+#include "trap.h"
+#include "texture.h"
 
 
 enum
