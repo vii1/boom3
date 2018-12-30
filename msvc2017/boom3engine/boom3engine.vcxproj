@@ -127,7 +127,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\direct3d\display.h" />
     <ClInclude Include="..\..\direct3d\mipmap.h" />
-    <ClInclude Include="..\..\direct3d\system.h" />
     <ClInclude Include="..\..\direct3d\texd3d.h" />
     <ClInclude Include="..\..\engine\boom.h" />
     <ClInclude Include="..\..\engine\collide.h" />
@@ -152,7 +151,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\direct3d\display.cpp" />
     <ClCompile Include="..\..\direct3d\mipmap.cpp" />
-    <ClCompile Include="..\..\direct3d\system.cpp" />
     <ClCompile Include="..\..\direct3d\texd3d.cpp" />
     <ClCompile Include="..\..\engine\collide.cpp" />
     <ClCompile Include="..\..\engine\draw.cpp" />
