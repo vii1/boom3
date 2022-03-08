@@ -15,6 +15,10 @@
 
 #include "types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifdef _PLAYER_CPP
   #define GLOBAL
 #else
@@ -49,5 +53,9 @@ void player_init(coord3d x,coord3d y,coord3d z);
 void player_rotate(angle ax,angle ay,angle az);
 // advances the player movement with the elapsed time
 bool player_idle(long time);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

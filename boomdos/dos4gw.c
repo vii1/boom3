@@ -83,9 +83,9 @@ bool dosfree(word selector)
 }
 
 // executes 16 bit real mode interrupt
-bool int16(int int_no,REGPACKX *r)
+bool int16(int int_no,struct REGPACKX *r)
 {
-  Tdos4gwregs regs;
+  struct Tdos4gwregs regs;
 
   regs.eax=r->eax;
   regs.ebx=r->ebx;
@@ -102,7 +102,7 @@ bool int16(int int_no,REGPACKX *r)
   regs.ss=0;
   regs.sp=0;
   regs.ip=0;
-  byte result;
+  byte result=0;
   _asm {
     mov  ebx,int_no
     mov  dx,ss

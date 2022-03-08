@@ -13,6 +13,9 @@
 #ifndef _KBD_H
 #define _KBD_H
 
+#ifdef __cplusplus
+extern "C"
+#endif
 // hooks the keyboard interrupt handler
 void kbd_init( void );
 

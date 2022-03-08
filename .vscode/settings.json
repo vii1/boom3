@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "*.asm": "asm",
+        "*.idc": "c",
+        "*.ksy": "yaml",
+        "*.inc": "asm",
+        "*.TXT": "plaintext",
+        "*.wat": "makefile",
+        "*.w32": "makefile",
+        "*.mak": "makefile",
+        "*.toml": "toml",
+        "*.ASM": "asm-intel-x86-generic",
+        "DOS4GW.H": "cpp",
+        "KBD.H": "cpp",
+        "player.h": "c",
+        "types.h": "c"
+    }
+}

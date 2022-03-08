@@ -13,8 +13,9 @@
 #ifndef _TYPES_H
 #define _TYPES_H
 
-#pragma warning( disable: 4244 )
-#pragma warning( disable: 4305 )
+#ifndef __cplusplus
+#include <stdbool.h>
+#endif
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -29,12 +30,12 @@ typedef float coord2d;
 ////////////////////////////////////////////////////////////////////////////
 
 //general struct definitions
-struct Tvertex {
+typedef struct Tvertex {
   coord3d x,y;
-};
+} Tvertex;
 
-struct Tvector {
+typedef struct Tvector {
   coord3d x,y,z;
-};
+} Tvector;
 
 #endif

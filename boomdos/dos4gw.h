@@ -16,6 +16,10 @@
 #include <i86.h>
 #include "types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // converts real mode addres to flat mode address
 void *realtoflat(void *a);
 // allocates DOS memory block (in the first 1MB)
@@ -23,7 +27,7 @@ bool dosalloc(dword size,void *adr,word *selector);
 // frees DOS memory block
 bool dosfree(word selector);
 // executes 16 bit real mode interrupt
-bool int16(int int_no,REGPACKX *r);
+bool int16(int int_no,struct REGPACKX *r);
 //converts physical address to linear address
 bool getlinear(dword phys,dword size,byte **linear);
 //frees a linear address space
@@ -31,4 +35,7 @@ bool freelinear(byte *linear);
 // locks a region in the memory
 bool lockregion(void *address,dword length);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

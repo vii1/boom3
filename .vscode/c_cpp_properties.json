@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "DOS",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${WATCOM}/h"
+            ],
+            "defines": [
+                "far=",
+                "interrupt=",
+                "_loadds=",
+                "__X86__=1",
+                "__386__=1",
+                "M_I386=1",
+                "_M_I386=1",
+                "_M_IX86=500",
+                "__DOS__",
+                "_DOS",
+                "MSDOS",
+                "__FLAT__=1",
+                "M_386FM=1",
+                "_M_386FM=1",
+                "__WATCOMC__=1290",
+                "DOS4GW"
+            ],
+            "windowsSdkVersion": "10.0.18362.0",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe",
+            "cppStandard": "c++98",
+            "intelliSenseMode": "msvc-x86",
+            "cStandard": "c99"
+        }
+    ],
+    "version": 4
+}
