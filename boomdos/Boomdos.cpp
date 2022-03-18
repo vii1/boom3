@@ -27,44 +27,43 @@
 static int scrwidth=0,scrheight=0;
 static bool waitfl=true;
 static bool backbuffl=false;
+static char* boofile = NULL;
 
 // parses command line parameters
-void parsecmdline(int argc,char *argv[])
+bool parsecmdline( int argc, char* argv[] )
 {
-  for (int i=0;i<argc;i++) {
-    char *arg=argv[i];
-    if (arg[0]=='/' ||arg[0]=='-') {
-      switch(arg[1]) {
-        case 'x':
-        case 'X':
-          scrwidth=atol(arg+2);
-          break;
-        case 'y':
-        case 'Y':
-          scrheight=atol(arg+2);
-          break;
-        case 'w':
-        case 'W':
-          waitfl=false;
-          break;
-        case 'b':
-        case 'B':
-          backbuffl=true;
-          break;
-      }
-    }
-  }
+	for( int i = 0; i < argc; i++ ) {
+		char* arg = argv[i];
+		if( arg[0] == '/' || arg[0] == '-' ) {
+			while( *( ++arg ) ) {
+				switch( *arg ) {
+					case 'm':
+						if( sscanf( arg + 1, "%ux%u", &scrwidth, &scrheight ) != 2 ) return false;
+						break;
+					case 'w': waitfl = false; break;
+					case 'b': backbuffl = true; break;
+					default: return false;
+				}
+				if( *arg == 'm' ) break;
+			}
+		} else if( boofile == NULL ) {
+			boofile = arg;
+		} else {
+			return false;
+		}
+	}
+	return true;
 }
 
 void printusage( void )
 {
   printf("\nBOOM 2 Engine by Ivaylo Beltchev\n");
   printf("MS-DOS version\n");
-  printf("Usage: boomdos <boo file> [/x<width> /y<height> /w /b]\n");
-  printf("/x<width>, /y<height> - screen size (requires VBE 2.0)\n");
-  printf("/w - don't wait for the vertical retrace (VBE 2.0 only)\n");
-  printf("/b - back buffer is in video memory (VBE 2.0 only)\n");
-  printf("Example: boomdos level.boo /x640 /y480 /w\n");
+	printf( "Usage: boomdos [OPTIONS] <boo file>\n" );
+	printf( "-m<width>x<height> - screen size (requires VBE 2.0)\n" );
+	printf( "-w - don't wait for the vertical retrace (VBE 2.0 only)\n" );
+	printf( "-b - back buffer is in video memory (VBE 2.0 only)\n" );
+	printf( "Example: boomdos level.boo -m640x480 -w\n" );
   printf("Controls:\n");
   printf("Arrows    - forward, backward, turn left, turn right\n");
   printf("Home/PgUp - strafe left/right\n");
@@ -108,8 +107,11 @@ void main(int argc,char *argv[])
     return;
   }
 
-  // parses command line parameters
-  parsecmdline(argc-2,argv+2);
+	// parses command line parameters
+	if( !parsecmdline( argc - 1, argv + 1 ) || boofile == NULL ) {
+		printusage();
+		return;
+	}
 
   // initializes the video mode and geometry module
   int mode=-1;
@@ -133,7 +135,7 @@ void main(int argc,char *argv[])
   mouse_init();
 
   // reads the map
-  if (!map_init(argv[1])) goto err;
+  if (!map_init(boofile)) goto err;
   vbe_setpal((Tcolor *)palette,0,256);
 
   // main loop
