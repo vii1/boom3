@@ -71,7 +71,7 @@ public:
   #define GLOBAL extern
 #endif
 
-GLOBAL int MIN_LX,MAX_LX;
+GLOBAL coord2d MIN_LX,MAX_LX;
 
 #undef GLOBAL
 

@@ -53,8 +53,8 @@ static void (*drawline)(int x1,int x2,int y);
 static void drawlinetilt(int x1,int x2,int y)
 {
   byte *b=ytbl[y]+x1;
-  y-=scr_oy;
-  int x=x1-scr_ox;
+  y-=(screenh/2);
+  int x=x1-(screenw/2);
   dword wd=curtxt->wd;
   dword he=curtxt->he;
   double A=wd*(x*PERSP_A.x+y*PERSP_A.y+PERSP_A.z);
@@ -140,8 +140,8 @@ static void drawlinetilt(int x1,int x2,int y)
 static void drawlinehor(int x1,int x2,int y)
 {
   byte *b=ytbl[y]+x1;
-  y-=scr_oy;
-  int x=x1-scr_ox;
+  y-=(screenh/2);
+  int x=x1-(screenw/2);
   dword wd=curtxt->wd;
   dword he=curtxt->he;
   double A=wd*(x*PERSP_A.x+y*PERSP_A.y+PERSP_A.z);
@@ -184,7 +184,7 @@ static void drawpolyhor(coord2d *vx,coord2d *vy,int n)
     if (xmax<(int)vx[i]) xmax=vx[i];
     if (xmin>(int)vx[i]) xmin=vx[i];
   }
-  if (xmax<0 || ymaxd<0 || xmin>=scr_dx || yd>=scr_dy) return;
+  if (xmax<0 || ymaxd<0 || xmin>=screenw || yd>=screenh) return;
   ymax=ymaxd;
   r=l;
   int p0=l;
@@ -205,7 +205,7 @@ static void drawpolyhor(coord2d *vx,coord2d *vy,int n)
   else dx2=(vx[r1]-vx[r])/(vy[r1]-vy[r]);
   x2=vx[r]+dx2*(y-vy[r]);
 
-  if (ymax>=scr_dy) ymax=scr_dy-1;
+  if (ymax>=screenh) ymax=screenh-1;
   for (;y<=ymax;y++) {
     if (y>vy[l1]) {
       while (y>vy[l1] && l1!=p0)
@@ -386,13 +386,13 @@ inline void split(coord2d x1,coord2d x2,coord2d ay1,coord2d ay2,
   *y = (a2*c1-a1*c2)/q;
 }
 
-// rotate n points in vx and stores them in vy
+// do final rotation & projection to screen space for n points
 void rotateyxpn(coord2d *vx,coord2d *vy,int n)
 {
   for (int i=0;i<n;i++) {
     if (sinx || siny) rotateyxp(vx[i],scr_foc,vy[i],vx+i,vy+i);
-    vx[i]+=scr_ox;
-    vy[i]=scr_oy-vy[i];
+    vx[i] =(vx[i]+scr_ox)/scr_dx*(screenw-1);
+    vy[i]=(scr_oy-vy[i])/scr_dy*(screenh-1);
   }
 }
 

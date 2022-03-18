@@ -42,10 +42,10 @@ void rotateyxv(Tvector *v);
 GLOBAL Tvector view;   // current view point
 GLOBAL angle viewa[3]; // current view angles
 GLOBAL double sinx,cosx,siny,cosy,sinz,cosz;  // sines and cosines of the view angles
-GLOBAL int scr_dx,scr_dy; // screen size
-GLOBAL int scr_ox,scr_oy; // screen center
-GLOBAL int scr_foc;       // focal length (distance between the view point and the screen)
-
+GLOBAL coord2d scr_dx,scr_dy; // screen size
+GLOBAL coord2d scr_ox,scr_oy; // screen center
+GLOBAL coord2d scr_foc;       // focal length (distance between the view point and the screen)
+GLOBAL int screenw, screenh;
 
 #undef GLOBAL
 

@@ -149,9 +149,9 @@ static void makeclip(Tclip *c)
   int u,d,u1,d1;
 
   rotatexyp(-scr_ox,scr_foc, scr_oy,vx+0,vy+0);
-  rotatexyp( scr_ox-1,scr_foc, scr_oy,vx+1,vy+1);
-  rotatexyp( scr_ox-1,scr_foc,-scr_oy+1,vx+2,vy+2);
-  rotatexyp(-scr_ox,scr_foc,-scr_oy+1,vx+3,vy+3);
+  rotatexyp( scr_ox,scr_foc, scr_oy,vx+1,vy+1);
+  rotatexyp( scr_ox,scr_foc,-scr_oy,vx+2,vy+2);
+  rotatexyp(-scr_ox,scr_foc,-scr_oy,vx+3,vy+3);
   coord2d xmin,xmax,ymin,ymax;
   xmin=xmax=vx[0];
   ymin=ymax=vy[0];
