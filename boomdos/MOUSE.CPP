@@ -12,7 +12,7 @@
 
 #define _MOUSE_CPP
 #include "mouse.h"
-#include "types.h"
+#include "engine/types.h"
 #include "dos4gw.h"
 #include <stdlib.h>
 

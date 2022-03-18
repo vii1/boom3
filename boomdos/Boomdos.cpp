@@ -10,10 +10,10 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-#include "boom.h"
-#include "player.h"
-#include "draw.h"
-#include "geom.h"
+#include "engine/boom.h"
+#include "engine/player.h"
+#include "engine/draw.h"
+#include "engine/geom.h"
 #include "kbd.h"
 #include "timer.h"
 #include "mouse.h"

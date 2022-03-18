@@ -14,7 +14,7 @@
 #define _DOS4GW_H
 
 #include <i86.h>
-#include "types.h"
+#include "engine/types.h"
 
 // converts real mode addres to flat mode address
 void *realtoflat(void *a);

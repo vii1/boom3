@@ -13,7 +13,9 @@
 #ifndef _VBE20_H
 #define _VBE20_H
 
-#include "types.h"
+#include "engine/types.h"
+
+#pragma pack(push, 1)
 
 // VBE controller information
 struct Tvbeinfo {
@@ -82,6 +84,8 @@ struct Tvbemode {
   word  height;
   word  bpp;
 };
+
+#pragma pack(pop)
 
 #ifdef _VBE20_CPP
 #define GLOBAL

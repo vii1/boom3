@@ -12,8 +12,8 @@
 
 #define _KBD_CPP
 #include "kbd.h"
-#include "types.h"
-#include "player.h"
+#include "engine/types.h"
+#include "engine/player.h"
 #include "dos4gw.h"
 
 #include <conio.h>

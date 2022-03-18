@@ -1,0 +1,19 @@
+!ifndef ROOT
+!error Se requiere la macro ROOT
+!endif
+!ifndef CPU
+!error Se requiere la macro CPU
+!endif
+
+ENGINE_DIR = $(ROOT)$(SEP)engine
+ENGINE_LIB = $(OUTDIR_BASE)$(SEP)engine$(SEP)$(CONFIG).$(CPU)$(SEP)engine$(LIB_SUFFIX)
+# INCLUDE += -I$(ENGINE_DIR)
+LIBS += $(ENGINE_LIB)
+
+engine: $(ENGINE_LIB) .SYMBOLIC
+	@%null
+
+$(ENGINE_LIB): .SYMBOLIC
+	cd $(ENGINE_DIR)
+	$(MAKE) -h $^. CPU=$(CPU) CONFIG=$(CONFIG) TARGET_SYS=$(TARGET_SYS)
+	cd $+$(%cwd)$-

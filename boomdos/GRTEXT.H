@@ -12,7 +12,7 @@
 
 #ifndef _GRTEXT_H
 #define _GRTEXT_H
-#include "types.h"
+#include "engine/types.h"
 
 extern "C" {
 extern dword scr_cols; // screen width
