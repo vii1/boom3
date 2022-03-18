@@ -31,7 +31,7 @@ OBJS 		= Collide.obj Draw.obj Geom.obj Player.obj Read.obj Tclip.obj Tcluster.ob
 
 !ifeqi CONFIG debug
 # OBJS		+= debug.obj
-# OBJS		+= mono.obj
+OBJS		+= mono.obj
 !endif
 
 .BEFORE

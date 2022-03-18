@@ -27,7 +27,10 @@
 #include <time.h>
 #endif
 
+#include "debug.h"
+
 bool debug_key = false;
+mono_print debug;
 
 static angle ang[3]={0,0,0};
 
@@ -213,4 +216,5 @@ void player_init(coord3d x,coord3d y,coord3d z)
   a.x=0;a.y=0;a.z=0;
   ang[0]=ang[1]=ang[2]=0;
   height=250;
+	debug.clear();
 }
