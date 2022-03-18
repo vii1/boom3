@@ -22,7 +22,7 @@
 
 void (interrupt far *old_kbd) ( void );
 
-static byte scan_codes[]={72,80,75,77,71,73,45,57,30,44,24,25,76,42,1};
+static byte scan_codes[] = { 0x11, 0x1F, 75, 77, 0x1E, 0x20, 0x1D, 57, 0x47, 0x4F, 24, 25, 76, 42, 1, 0x3B };
 
 // dummy function to indicate org of the code to lock
 static void kbd_lock_region_begin( void )

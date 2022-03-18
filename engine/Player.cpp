@@ -27,6 +27,8 @@
 #include <time.h>
 #endif
 
+bool debug_key = false;
+
 static angle ang[3]={0,0,0};
 
 static Tvector v,a,f;
@@ -55,6 +57,8 @@ static bool process_kbd(double time)
   angle dang;
   coord3d force;
   f.x=0;f.y=0;da=0;
+
+  debug_key = (kbd & kDEBUG) != 0;
 
   dang=DANG;force=FORCE;
   if (kbd & kRUN) {

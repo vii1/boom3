@@ -37,6 +37,7 @@
 #define kCENTER     0x0001000
 #define kRUN        0x0002000
 #define kQUIT       0x0004000
+#define kDEBUG      0x0008000
 
 GLOBAL volatile dword player_keys; // current keys state (must be set by the application)
 GLOBAL coord3d height;  // current player height

@@ -65,15 +65,14 @@ void printusage( void )
 	printf( "-b - back buffer is in video memory (VBE 2.0 only)\n" );
 	printf( "Example: boomdos level.boo -m640x480 -w\n" );
   printf("Controls:\n");
-  printf("Arrows    - forward, backward, turn left, turn right\n");
-  printf("Home/PgUp - strafe left/right\n");
-  printf("X         - crouch\n");
-  printf("Space     - jump\n");
-  printf("A/Z       - look up/down\n");
-  printf("O/P       - rotate left/right\n");
-  printf("NumPad 5  - center view\n");
-  printf("Shift     - run\n");
-  printf("Esc       - exit\n\n");
+	printf( "W/A/S/D   - move\n" );
+	printf( "Ctrl      - crouch\n" );
+	printf( "Space     - jump\n" );
+	printf( "Home/End  - look up/down\n" );
+	printf( "O/P       - rotate left/right\n" );
+	printf( "NumPad 5  - center view\n" );
+	printf( "Shift     - run\n" );
+	printf( "Esc       - exit\n\n" );
   if (!vbe_init()) {
     printf("VBE 2.0 not found.\n\n");
     vbe_done();
@@ -160,8 +159,8 @@ void main(int argc,char *argv[])
     vbe_flip(waitfl);
 
     // applies the mouse movement
-    if (player_keys & kRUN) player_rotate(-mousedy*0.01,0,-mousedx*0.01);
-    else player_rotate(-mousedy*0.005,0,-mousedx*0.005);
+    if (player_keys & kRUN) player_rotate(mousedy*0.01,0,-mousedx*0.01);
+    else player_rotate(mousedy*0.005,0,-mousedx*0.005);
     mousedx=0;mousedy=0;
 
     // clears the keyboard queue
