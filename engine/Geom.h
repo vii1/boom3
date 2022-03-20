@@ -45,7 +45,8 @@ GLOBAL double sinx,cosx,siny,cosy,sinz,cosz;  // sines and cosines of the view a
 GLOBAL coord2d scr_dx,scr_dy; // screen size
 GLOBAL coord2d scr_ox,scr_oy; // screen center
 GLOBAL coord2d scr_foc;       // focal length (distance between the view point and the screen)
-GLOBAL int screenw, screenh;
+GLOBAL int screenw, screenh, screenw1, screenh1;
+GLOBAL double transformy, scalex, scaley;
 
 #undef GLOBAL
 

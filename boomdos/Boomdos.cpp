@@ -139,9 +139,9 @@ void main(int argc,char *argv[])
 
   // main loop
   time0=timer_clocks;
+  draw_init(vbe_backbuffer,vbe_width,vbe_height);
   while(player_idle(timer_clocks)) {
     // draws the current frame
-    draw_init(vbe_backbuffer,vbe_width,vbe_height);
     map_draw();
 
     // calculates the frame rate

@@ -21,8 +21,8 @@ void setscreensize(int w,int h)
   // FOV: de momento, el FOV es 90° horizontal en una pantalla 4:3
   //   -> ~67° vertical en cualquier pantalla horizontal
   //   -> ~67° horizontal en cualquier pantalla vertical
-  // El espacio cámara es 0..1, por tanto el lado más estrecho mide <1
-  // OJO! El FOV vertical habrá que limitarlo ya que limita la rotación de la cámara en X
+  // El espacio cámara es -0.5..0.5, por tanto el lado más estrecho mide <1
+  // OJO! El FOV vertical habrá que limitarlo ya que limita el cabeceo de la cámara, y el horizontal a 180° máximo
   // (puesto que no se permite proyectar nada que esté detrás de la cámara)
   // (ver pág 32-33 del doc)
 
@@ -41,6 +41,11 @@ void setscreensize(int w,int h)
   }
   screenw = w;
   screenh = h;
+  screenw1 = w - 1;
+  screenh1 = h - 1;
+  transformy = scr_oy - scr_dy*screenh/screenh1;
+  scalex = scr_dx / screenw1;
+  scaley = scr_dy / screenh1;
 }
 
 // sets current view point and view angles

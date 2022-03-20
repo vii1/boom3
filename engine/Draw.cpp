@@ -21,7 +21,11 @@
 #include <stdio.h>
 #include <math.h>
 
-// vectors for the perspective texture mapping
+#include "debug.h"
+
+// Polynomial coeffs for the perspective texture mapping (x,y are SCREEN SPACE):
+// u = PERSP_A(x,y)/PERSP_C(x,y)
+// v = PERSP_B(x,y)/PERSP_C(x,y)
 static Tvector PERSP_A,PERSP_B,PERSP_C;
 
 // curent texture
@@ -53,13 +57,12 @@ static void (*drawline)(int x1,int x2,int y);
 static void drawlinetilt(int x1,int x2,int y)
 {
   byte *b=ytbl[y]+x1;
-  y-=(screenh/2);
-  int x=x1-(screenw/2);
+
   dword wd=curtxt->wd;
   dword he=curtxt->he;
-  double A=wd*(x*PERSP_A.x+y*PERSP_A.y+PERSP_A.z);
-  double B=he*(x*PERSP_B.x+y*PERSP_B.y+PERSP_B.z);
-  double C=x*PERSP_C.x+y*PERSP_C.y+PERSP_C.z;
+  double A=wd*(x1*PERSP_A.x+y*PERSP_A.y+PERSP_A.z);
+  double B=he*(x1*PERSP_B.x+y*PERSP_B.y+PERSP_B.z);
+  double C=x1*PERSP_C.x+y*PERSP_C.y+PERSP_C.z;
   byte *txt=curtxt->datap;
   x2-=x1;
 
@@ -140,12 +143,12 @@ static void drawlinetilt(int x1,int x2,int y)
 static void drawlinehor(int x1,int x2,int y)
 {
   byte *b=ytbl[y]+x1;
-  y-=(screenh/2);
-  int x=x1-(screenw/2);
+
   dword wd=curtxt->wd;
   dword he=curtxt->he;
-  double A=wd*(x*PERSP_A.x+y*PERSP_A.y+PERSP_A.z);
-  double B=he*(x*PERSP_B.x+y*PERSP_B.y+PERSP_B.z);
+
+  double A=wd*(x1*PERSP_A.x+y*PERSP_A.y+PERSP_A.z);
+  double B=he*(x1*PERSP_B.x+y*PERSP_B.y+PERSP_B.z);
   double C=y*PERSP_C.y+PERSP_C.z;
   byte *txt=curtxt->datap;
   x2-=x1;
@@ -227,6 +230,7 @@ static void drawpolyhor(coord2d *vx,coord2d *vy,int n)
   }
 }
 
+// TODO: adapt this to new camera/screen space
 #if USE_DRAWPOLYVER
 // draws a single vertical column
 static void drawlinever(int y1,int y2,int x)
@@ -452,28 +456,27 @@ void drawmp(Tmonotone *mp)
 // q is a vector in the polygon plane along v
 void setdrawdata(Tvector *a,Tvector *p,Tvector *q)
 {
-  PERSP_A.x=a->y*q->z-a->z*q->y;
-  PERSP_A.y=a->x*q->y-a->y*q->x;
-  PERSP_A.z=(a->z*q->x-a->x*q->z)*scr_foc;
+  PERSP_A.x = (a->y*q->z - a->z*q->y) * scalex;
+  PERSP_A.y = (a->x*q->y - a->y*q->x) * scaley; 
+  PERSP_A.z = scr_ox*(a->z*q->y-a->y*q->z) + scr_foc*(a->z*q->x-a->x*q->z) + transformy*(a->x*q->y-a->y*q->x);
 
-  PERSP_B.x=a->z*p->y-a->y*p->z;
-  PERSP_B.y=a->y*p->x-a->x*p->y;
-  PERSP_B.z=(a->x*p->z-a->z*p->x)*scr_foc;
+  PERSP_B.x = (a->z*p->y - a->y*p->z) * scalex;
+  PERSP_B.y = (a->y*p->x - a->x*p->y) * scaley;
+  PERSP_B.z = scr_ox*(p->z*a->y-p->y*a->z) +scr_foc*(p->z*a->x-p->x*a->z)+transformy*(p->x*a->y-p->y*a->x);
 
-  PERSP_C.x=p->z*q->y-p->y*q->z;
-  PERSP_C.y=p->y*q->x-p->x*q->y;
-  PERSP_C.z=(p->x*q->z-p->z*q->x)*scr_foc;
+  PERSP_C.x = (p->z*q->y - p->y*q->z) * scalex;
+  PERSP_C.y = (p->y*q->x - p->x*q->y) * scaley;
+  PERSP_C.z = scr_ox*(q->z*p->y-q->y*p->z) + scr_foc*(q->z*p->x-q->x*p->z)  + transformy*(q->x*p->y - q->y*p->x);
 
 #ifdef SOFTWARE_RENDER
-  double ax=fabs(PERSP_C.x);
-  double ay=fabs(PERSP_C.y);
-  double az=fabs(PERSP_C.z/scr_foc);
-  if (ax*1000<ay || ax*1000<az)
+   double ax=fabs(PERSP_C.x);
+   if(ax<0.5)
     drawline=drawlinehor;
-  else
+   else
     drawline=drawlinetilt;
 #if USE_DRAWPOLYVER
-  if ((ay*1000<ax || ay*1000<az) && sinx==0 && siny==0)
+  double ay=fabs(PERSP_C.y);
+  if (ay<0.5 && sinx==0 && siny==0)
     drawpoly=drawpolyver;
   else
 #endif

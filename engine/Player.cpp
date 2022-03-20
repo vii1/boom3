@@ -39,6 +39,7 @@ static angle da;
 static bool jumpfl,groundfl=true,collisionfl=false;
 
 #define DANG      3
+#define ANG_LIMIT 0.8 // TODO: calculate from scr_oy, scr_foc
 
 #define FORCE     7000
 #define GRAVITY   8000
@@ -84,8 +85,8 @@ static bool process_kbd(double time)
   if (kbd & kMOVELEFT)  f.x -= force;
   if (kbd & kMOVERIGHT) f.x += force;
 
-  if (ang[0]<-0.6) ang[0]=-0.6;
-  if (ang[0]> 0.6) ang[0]= 0.6;
+  if (ang[0]<-ANG_LIMIT) ang[0]=-ANG_LIMIT;
+  if (ang[0]> ANG_LIMIT) ang[0]= ANG_LIMIT;
   
   jumpfl=(kbd & kJUMP)!=0;
   return (kbd&kQUIT)==0;
@@ -97,8 +98,8 @@ void player_rotate(angle ax,angle ay,angle az)
   ang[0]+=ax;
   ang[1]+=ay;
   ang[2]+=az;
-  if (ang[0]<-0.6) ang[0]=-0.6;
-  if (ang[0]> 0.6) ang[0]= 0.6;
+  if (ang[0]<-ANG_LIMIT) ang[0]=-ANG_LIMIT;
+  if (ang[0]> ANG_LIMIT) ang[0]= ANG_LIMIT;
 }
 
 // advances the player movement with the elapsed time
