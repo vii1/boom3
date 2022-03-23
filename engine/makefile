@@ -1,8 +1,18 @@
+!ifndef ROOT
 !include ../os.mif
+!else
+!include $(ROOT)/os.mif
+!endif
 
 PROJECT 	= engine
 
+!ifdef ROOT
+PROJ_DIR 	= $(ROOT)$(SEP)$(PROJECT)
+!else
+PROJ_DIR	= .
 ROOT		= ..
+!endif
+
 CONFIG		= release
 CPU			= 386
 OUTDIR_BASE	= $(ROOT)$(SEP)build.$(TARGET_SYS)
@@ -11,7 +21,7 @@ OUTDIR		= $(OUTDIR_BASE)$(SEP)$(PROJECT)$(SEP)$(CONFIG).$(CPU)
 OPTIONS		= -bt=$(WATCOM_BT) -w1 -we -q -zp4 -mf -I$(ROOT) #-za99
 
 !ifeqi CONFIG debug
-OPTIONS		+= -d2 -D_DEBUG -DDEBUG_PREVIEW
+OPTIONS		+= -d2 -D_DEBUG -DDEBUG_PREVIEW -xs
 !else
 OPTIONS		+= -onatx
 !endif
@@ -23,16 +33,17 @@ OPTIONS		+= -3r -fpi
 !endif
 
 LIB			= $(PROJECT)$(LIB_SUFFIX)
+SOURCEPATH  = $(PROJ_DIR)
 
-#OBJS		= clip.obj cluster.obj collide.obj draw.obj geom.obj hole.obj line.obj map.obj mapitem.obj &
-#			player.obj portal.obj read.obj sector.obj texture.obj trap.obj wall.obj write.obj
-OBJS 		= Collide.obj Draw.obj Geom.obj Player.obj Read.obj Tclip.obj Tcluster.obj Thole.obj &
+OBJS = Collide.obj Draw.obj Geom.obj Player.obj Read.obj Tclip.obj Tcluster.obj Thole.obj &
 			Tline.obj Tmap.obj Tmapitem.obj Tportal.obj Tsector.obj Ttexture.obj Ttrap.obj Twall.obj Write.obj
 
 !ifeqi CONFIG debug
 # OBJS		+= debug.obj
 OBJS		+= mono.obj
+SOURCEPATH +=;$(ROOT)$(SEP)mono
 !endif
+
 
 .BEFORE
 	@if not exist $(OUTDIR_BASE) mkdir $(OUTDIR_BASE)
@@ -54,15 +65,17 @@ $(OUTDIR)$(SEP)$(LIB): $(OBJS)
 #	@for %i in ($(OBJS)) do wlib -q $^@ +$(OUTDIR)$(SEP)%i
 	*wlib -n -q $^@ +$(OUTDIR)$(SEP)$(OBJS: = +$(OUTDIR)$(SEP))
 
-.c: .
-.cpp: .;..$(SEP)mono
+.c: $(SOURCEPATH)
+.cpp: $(SOURCEPATH)
 .obj: $(OUTDIR)
 
+.ERASE
 .c.obj: .AUTODEPEND
-	*wcc386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $<
+	*wcc386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^@ $[@
 
+.ERASE
 .cpp.obj: .AUTODEPEND
-	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $<
+	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^@ $[@
 
 clean: .SYMBOLIC
 	@if exist $(OUTDIR)$(SEP)*.err $(DELETE) $(OUTDIR)$(SEP)*.err

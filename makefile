@@ -1,12 +1,11 @@
 !include os.mif
 
-ROOT		= $+$(%cwd)$-
+# ROOT		= $+$(%cwd)$-
+ROOT		= .
 CONFIG		= release
 CPU			= 386
 TARGET_SYS	= dos
 OUTDIR_BASE	= $(ROOT)$(SEP)build.$(TARGET_SYS)
-
-MAKE = $(MAKE) -h
 
 BOOMDOS_EXE = $(ROOT)$(SEP)boomdos$(EXE_SUFFIX)
 
@@ -14,9 +13,7 @@ all: engine boomdos .SYMBOLIC
 	@%null
 
 boomdos: engine .SYMBOLIC
-	cd $(ROOT)$(SEP)boomdos
-	$(MAKE) TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU)
-	cd $+$(%cwd)$-
+	$(MAKE) -f $(ROOT)$(SEP)boomdos$(SEP)makefile TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT)
 	$(COPY) $(OUTDIR_BASE)$(SEP)boomdos$(SEP)$(CONFIG).$(CPU)$(SEP)boomdos$(EXE_SUFFIX) $(BOOMDOS_EXE)
 
 # !include fixmath/fixmath.mif

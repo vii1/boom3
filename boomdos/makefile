@@ -1,8 +1,18 @@
+!ifndef ROOT
 !include ../os.mif
+!else
+!include $(ROOT)/os.mif
+!endif
 
 PROJECT 	= boomdos
 
+!ifdef ROOT
+PROJ_DIR 	= $(ROOT)$(SEP)$(PROJECT)
+!else
+PROJ_DIR	= .
 ROOT		= ..
+!endif
+
 CONFIG		= release
 CPU			= 386
 TARGET_SYS	= dos
@@ -12,7 +22,7 @@ OUTDIR		= $(OUTDIR_BASE)$(SEP)$(PROJECT)$(SEP)$(CONFIG).$(CPU)
 OPTIONS		= -bt=$(WATCOM_BT) -w1 -q -zp4 -mf -I$(ROOT)
 
 !ifeqi CONFIG debug
-OPTIONS		+= -d2 -D_DEBUG
+OPTIONS		+= -d2 -D_DEBUG -xs
 !else
 OPTIONS		+= -onatx
 !endif
@@ -24,6 +34,7 @@ OPTIONS		+= -3r -fpi
 !endif
 
 EXE			= $(PROJECT)$(EXE_SUFFIX)
+SOURCEPATH  = $(PROJ_DIR)
 
 OBJS		= boomdos.obj dos4gw.obj grtext.obj kbd.obj mouse.obj timer.obj vbe20.obj
 
@@ -36,7 +47,7 @@ all: $(EXE) .SYMBOLIC
 	@%null
 
 # !include ../fixmath/fixmath.mif
-!include ../engine/engine.mif
+!include $(ROOT)/engine/engine.mif
 
 OPTIONS += $(INCLUDE) $(DEFINE)
 
@@ -57,17 +68,19 @@ $(OUTDIR)$(SEP)$(EXE): $(OBJS) $(LIBS)
 		file { $(OBJS) } &
 		libfile { $(LIBS) }
 
-.c: .
+.c: $(SOURCEPATH)
+.cpp: $(SOURCEPATH)
+.asm: $(SOURCEPATH)
 .obj: $(OUTDIR)
 
 .c.obj: .AUTODEPEND
-	*wcc386 $(OPTIONS) -za99 -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $<
+	*wcc386 $(OPTIONS) -za99 -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $[@
 
 .cpp.obj: .AUTODEPEND
-	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $<
+	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $[@
 
 .asm.obj: .AUTODEPEND
-	*wasm -i=$(ROOT) -q -fo=$(OUTDIR)\$^. -fr=$(OUTDIR)\$^& $<
+	*wasm -i=$(ROOT) -q -fo=$(OUTDIR)\$^. -fr=$(OUTDIR)\$^& $[@
 
 clean: .SYMBOLIC
 	@if exist $(OUTDIR)$(SEP)*.err $(DELETE) $(OUTDIR)$(SEP)*.err

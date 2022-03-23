@@ -292,3 +292,4 @@ __pycache__/
 /boomdemo/
 /.vscode/
 /*.dbg
+*.bak
