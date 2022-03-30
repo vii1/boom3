@@ -70,11 +70,11 @@ $(OUTDIR)$(SEP)$(LIB): $(OBJS)
 
 .ERASE
 .c.obj: .AUTODEPEND
-	*wcc386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^@ $[@
+	*wcc386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. $[@
 
 .ERASE
 .cpp.obj: .AUTODEPEND
-	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^@ $[@
+	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. $[@
 
 clean: .SYMBOLIC
 	@if exist $(OUTDIR)$(SEP)*.err $(DELETE) $(OUTDIR)$(SEP)*.err

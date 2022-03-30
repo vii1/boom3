@@ -109,7 +109,6 @@ bool player_idle(long time)
   if (t>0.1) t=0.1;
   old_time=time;
   bool r=process_kbd(t);
-
   if (!cur_cluster) {
     // if the player is not in any cluster, don't move
     if (map->move(0,0,0,0,0,0)) {
@@ -127,7 +126,9 @@ bool player_idle(long time)
       for (si=0,s=c->sectors;si<c->sectorsnum;NEXTSECTOR(s),si++)
         if (s->inside(view.x,view.y)) {
           coord3d dz=s->getzf(view.x,view.y)+CROUCHHEIGHT-view.z;
-          if (map->move(0,0,dz,ang[0],ang[1],ang[2])) return r;
+          if (map->move(0,0,dz,ang[0],ang[1],ang[2])) {
+            return r;
+          }
         }
     }
     return r;

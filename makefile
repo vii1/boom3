@@ -20,10 +20,8 @@ boomdos: engine .SYMBOLIC
 !include engine/engine.mif
 
 clean: .SYMBOLIC
-	cd $(ROOT)$(SEP)boomdos
-	$(MAKE) clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU)
-	cd $(ROOT)$(SEP)engine
-	$(MAKE) clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU)
+	$(MAKE) -f $(ROOT)$(SEP)boomdos$(SEP)makefile clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT)
+	$(MAKE) -f $(ROOT)$(SEP)engine$(SEP)makefile clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT)
 #	cd $(ROOT)$(SEP)fixmath
 #	$(MAKE) clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU)
-	cd $+$(%cwd)$-
+#	cd $+$(%cwd)$-

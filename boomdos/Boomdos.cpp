@@ -19,6 +19,7 @@
 #include "mouse.h"
 #include "grtext.h"
 #include "vbe20.h"
+#include "demo.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -29,11 +30,16 @@ static bool waitfl=true;
 static bool backbuffl=false;
 static char* boofile = NULL;
 
+static Demo* demo = NULL;
+static bool playdemo = false, recdemo = false;
+static char* demofile = NULL;
+
 // parses command line parameters
 bool parsecmdline( int argc, char* argv[] )
 {
 	for( int i = 0; i < argc; i++ ) {
 		char* arg = argv[i];
+    bool getname = false;
 		if( arg[0] == '/' || arg[0] == '-' ) {
 			while( *( ++arg ) ) {
 				switch( *arg ) {
@@ -42,11 +48,24 @@ bool parsecmdline( int argc, char* argv[] )
 						break;
 					case 'w': waitfl = false; break;
 					case 'b': backbuffl = true; break;
+          case 'R':
+            if(playdemo || (demofile != NULL)) return false;
+            recdemo = true;
+            getname = true;
+            break;
+          case 'P':
+            if(recdemo || (demofile != NULL)) return false;
+            playdemo = true;
+            getname = true;
+            break;
 					default: return false;
 				}
 				if( *arg == 'm' ) break;
 			}
-		} else if( boofile == NULL ) {
+    } else if( getname ) {
+      demofile = arg;
+      getname = false;
+    } else if( boofile == NULL ) {
 			boofile = arg;
 		} else {
 			return false;
@@ -93,7 +112,7 @@ void printusage( void )
   vbe_done();
 }
 
-// application entry point
+// application entry ºpoint
 void main(int argc,char *argv[])
 {
   int system_time=0;
@@ -137,10 +156,26 @@ void main(int argc,char *argv[])
   if (!map_init(boofile)) goto err;
   vbe_setpal((Tcolor *)palette,0,256);
 
+  if(playdemo) {
+    demo = new Demo();
+  } else if(recdemo) {
+    demo = Demo::loadFromFile(demofile);
+  }
   // main loop
   time0=timer_clocks;
   draw_init(vbe_backbuffer,vbe_width,vbe_height);
-  while(player_idle(timer_clocks)) {
+  while((player_keys&kQUIT) == 0) {
+    if(playdemo) {
+      Tvector v;
+      angle a[3];
+      playdemo = demo->play(timer_clocks, &v, a);
+      map->move(view.x-v.x, view.y-v.y, view.z-v.z, a[0], a[1], a[2]);
+    } else {
+      if( !player_idle( timer_clocks ) ) break;
+      if( recdemo ) {
+        demo->record( timer_clocks, view, viewa );
+      }
+    }   
     // draws the current frame
     map_draw();
 
@@ -169,4 +204,6 @@ void main(int argc,char *argv[])
  err:
   vbe_done();
   vbe_settext();
+  if(recdemo) demo->saveToFile(demofile);
+  if(demo) delete demo;
 }
