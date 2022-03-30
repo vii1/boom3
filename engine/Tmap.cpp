@@ -145,6 +145,11 @@ Tcluster *Tmap::getcluster(int target)
 // the result is a list of trapezoids
 static void makeclip(Tclip *c)
 {
+  // TODO: Se puede adaptar esta función para dar cualquier forma al viewport!
+  // (siempre que sea representable como un polígono monótono)
+  // Ej: - viewport que deja sitio al HUD, para que el HUD no tenga que repintar encima
+  //     - viewport con forma de polígono regular, para simular un visor circular (p.ej. rifles de francotirador, prismáticos)
+  //     - pantalla partida o picture-in-picture con formas divertidas
   coord2d vx[4],vy[4];
   int u,d,u1,d1;
 
@@ -236,7 +241,7 @@ void Tmap::draw( void )
     // initializes the current clip
     Tclip c;
     csegment=1;
-    makeclip(&c);
+    makeclip(&c);		// TODO: si el viewport no cambia de forma, no hace falta crear el clip en cada frame!
     set_cur_clip(&c);
     gymax=c.ymax;
     gymin=c.ymin;

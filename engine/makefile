@@ -39,8 +39,7 @@ OBJS = Collide.obj Draw.obj Geom.obj Player.obj Read.obj Tclip.obj Tcluster.obj 
 			Tline.obj Tmap.obj Tmapitem.obj Tportal.obj Tsector.obj Ttexture.obj Ttrap.obj Twall.obj Write.obj
 
 !ifeqi CONFIG debug
-# OBJS		+= debug.obj
-OBJS		+= mono.obj
+OBJS		+= mono.obj debug.obj
 SOURCEPATH +=;$(ROOT)$(SEP)mono
 !endif
 

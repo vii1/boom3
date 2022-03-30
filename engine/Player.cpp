@@ -29,9 +29,6 @@
 
 #include "debug.h"
 
-bool debug_key = false;
-mono_print debug;
-
 static angle ang[3]={0,0,0};
 
 static Tvector v,a,f;
