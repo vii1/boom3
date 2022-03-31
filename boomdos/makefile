@@ -73,12 +73,15 @@ $(OUTDIR)$(SEP)$(EXE): $(OBJS) $(LIBS)
 .asm: $(SOURCEPATH)
 .obj: $(OUTDIR)
 
+.ERASE
 .c.obj: .AUTODEPEND
 	*wcc386 $(OPTIONS) -za99 -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $[@
 
+.ERASE
 .cpp.obj: .AUTODEPEND
 	*wpp386 $(OPTIONS) -fo=$(OUTDIR)$(SEP)$^. -fr=$(OUTDIR)$(SEP)$^& $[@
 
+.ERASE
 .asm.obj: .AUTODEPEND
 	*wasm -i=$(ROOT) -q -fo=$(OUTDIR)\$^. -fr=$(OUTDIR)\$^& $[@
 

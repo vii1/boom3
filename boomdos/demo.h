@@ -17,6 +17,13 @@ struct DemoFrame {
 		this->angles[1] = angles[1];
 		this->angles[2] = angles[2];
 	}
+	DemoFrame(const DemoFrame& f) {
+		this->timestamp = f.timestamp;
+		this->viewPos = f.viewPos;
+		this->angles[0] = f.angles[0];
+		this->angles[1] = f.angles[1];
+		this->angles[2] = f.angles[2];
+	}
 };
 
 class Demo {

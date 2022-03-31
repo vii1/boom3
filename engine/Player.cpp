@@ -100,7 +100,7 @@ void player_rotate(angle ax,angle ay,angle az)
 }
 
 // advances the player movement with the elapsed time
-bool player_idle(long time)
+bool player_idle(long time, bool demo)
 {
   double t; // time from the previous frame in seconds
   static long old_time=0;
@@ -108,7 +108,9 @@ bool player_idle(long time)
   t=(time-old_time)/1000.;
   if (t>0.1) t=0.1;
   old_time=time;
-  bool r=process_kbd(t);
+  bool r=demo || process_kbd(t);
+
+  // TODO: mover esto a Map::move y permitir darle coordenadas absolutas ("teletransporte")
   if (!cur_cluster) {
     // if the player is not in any cluster, don't move
     if (map->move(0,0,0,0,0,0)) {
@@ -134,6 +136,8 @@ bool player_idle(long time)
     return r;
   }
 
+  if(demo) return r;
+  
   // calculates the acceleration
   if (groundfl) {
     ang[2]+=da*t;

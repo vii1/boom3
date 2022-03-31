@@ -49,6 +49,6 @@ void player_init(coord3d x,coord3d y,coord3d z);
 // rotates the player with the given angles
 void player_rotate(angle ax,angle ay,angle az);
 // advances the player movement with the elapsed time
-bool player_idle(long time);
+bool player_idle(long time, bool demo = false);
 
 #endif

@@ -37,9 +37,9 @@ static char* demofile = NULL;
 // parses command line parameters
 bool parsecmdline( int argc, char* argv[] )
 {
+  bool getname = false;
 	for( int i = 0; i < argc; i++ ) {
 		char* arg = argv[i];
-    bool getname = false;
 		if( arg[0] == '/' || arg[0] == '-' ) {
 			while( *( ++arg ) ) {
 				switch( *arg ) {
@@ -112,8 +112,8 @@ void printusage( void )
   vbe_done();
 }
 
-// application entry ºpoint
-void main(int argc,char *argv[])
+// application entry point
+int main(int argc,char *argv[])
 {
   int system_time=0;
   int frame_counter=0;
@@ -122,13 +122,13 @@ void main(int argc,char *argv[])
 
   if (argc<2) {
     printusage();
-    return;
+    return 1;
   }
 
 	// parses command line parameters
 	if( !parsecmdline( argc - 1, argv + 1 ) || boofile == NULL ) {
 		printusage();
-		return;
+		return 1;
 	}
 
   // initializes the video mode and geometry module
@@ -157,9 +157,9 @@ void main(int argc,char *argv[])
   vbe_setpal((Tcolor *)palette,0,256);
 
   if(playdemo) {
-    demo = new Demo();
-  } else if(recdemo) {
     demo = Demo::loadFromFile(demofile);
+  } else if(recdemo) {
+    demo = new Demo();
   }
   // main loop
   time0=timer_clocks;
@@ -169,7 +169,9 @@ void main(int argc,char *argv[])
       Tvector v;
       angle a[3];
       playdemo = demo->play(timer_clocks, &v, a);
-      map->move(view.x-v.x, view.y-v.y, view.z-v.z, a[0], a[1], a[2]);
+      // map->move(view.x-v.x, view.y-v.y, view.z-v.z, a[0], a[1], a[2]);
+      if( !player_idle( timer_clocks, true ) ) break;
+      setviewpoint(v.x, v.y, v.z, a[0], a[1], a[2]);
     } else {
       if( !player_idle( timer_clocks ) ) break;
       if( recdemo ) {
@@ -193,9 +195,11 @@ void main(int argc,char *argv[])
     // flips the video pages
     vbe_flip(waitfl);
 
-    // applies the mouse movement
-    if (player_keys & kRUN) player_rotate(mousedy*0.01,0,-mousedx*0.01);
-    else player_rotate(mousedy*0.005,0,-mousedx*0.005);
+    if(!playdemo) {
+      // applies the mouse movement
+      if (player_keys & kRUN) player_rotate(mousedy*0.01,0,-mousedx*0.01);
+      else player_rotate(mousedy*0.005,0,-mousedx*0.005);
+    }
     mousedx=0;mousedy=0;
 
     // clears the keyboard queue
@@ -206,4 +210,5 @@ void main(int argc,char *argv[])
   vbe_settext();
   if(recdemo) demo->saveToFile(demofile);
   if(demo) delete demo;
+  return 0;
 }
