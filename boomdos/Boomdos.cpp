@@ -20,6 +20,7 @@
 #include "grtext.h"
 #include "vbe20.h"
 #include "demo.h"
+#include "bnchmark.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -33,6 +34,9 @@ static char* boofile = NULL;
 static Demo* demo = NULL;
 static bool playdemo = false, recdemo = false;
 static char* demofile = NULL;
+
+static bool		 benchmark = false;
+static Benchmark bench;
 
 // parses command line parameters
 bool parsecmdline( int argc, char* argv[] )
@@ -48,16 +52,17 @@ bool parsecmdline( int argc, char* argv[] )
 						break;
 					case 'w': waitfl = false; break;
 					case 'b': backbuffl = true; break;
-          case 'R':
-            if(playdemo || (demofile != NULL)) return false;
-            recdemo = true;
-            getname = true;
-            break;
-          case 'P':
-            if(recdemo || (demofile != NULL)) return false;
-            playdemo = true;
-            getname = true;
-            break;
+					case 'k': benchmark = true; break;
+					case 'R':
+						if( playdemo || ( demofile != NULL ) ) return false;
+						recdemo = true;
+						getname = true;
+						break;
+					case 'P':
+						if( recdemo || ( demofile != NULL ) ) return false;
+						playdemo = true;
+						getname	 = true;
+						break;
 					default: return false;
 				}
 				if( *arg == 'm' ) break;
@@ -181,16 +186,20 @@ int main(int argc,char *argv[])
     // draws the current frame
     map_draw();
 
-    // calculates the frame rate
-    frame_counter++;
-    int dt=timer_clocks-time0;
-    if (dt>500) {
-      float fps = (frame_counter*1000.)/dt;
-      sprintf(s,"%.1f FPS",fps);
-      time0 = timer_clocks;
-      frame_counter = 0;
+    if( benchmark ) {
+			bench.add( timer_clocks );
+		} else {
+      // calculates the frame rate
+      frame_counter++;
+      int dt=timer_clocks-time0;
+      if (dt>500) {
+        float fps = (frame_counter*1000.)/dt;
+        sprintf(s,"%.1f FPS",fps);
+        time0 = timer_clocks;
+        frame_counter = 0;
+      }
+      textout(vbe_backbuffer,0,0,s,255);
     }
-    textout(vbe_backbuffer,0,0,s,255);
 
     // flips the video pages
     vbe_flip(waitfl);
@@ -210,5 +219,6 @@ int main(int argc,char *argv[])
   vbe_settext();
   if(recdemo) demo->saveToFile(demofile);
   if(demo) delete demo;
+  if(benchmark) bench.report();
   return 0;
 }

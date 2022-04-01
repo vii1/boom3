@@ -36,7 +36,7 @@ OPTIONS		+= -3r -fpi
 EXE			= $(PROJECT)$(EXE_SUFFIX)
 SOURCEPATH  = $(PROJ_DIR)
 
-OBJS		= boomdos.obj dos4gw.obj grtext.obj kbd.obj mouse.obj timer.obj vbe20.obj demo.obj
+OBJS		= boomdos.obj dos4gw.obj grtext.obj kbd.obj mouse.obj timer.obj vbe20.obj demo.obj bnchmark.obj
 
 .BEFORE
 	@if not exist $(OUTDIR_BASE) mkdir $(OUTDIR_BASE)
