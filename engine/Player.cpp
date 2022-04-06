@@ -59,7 +59,9 @@ static bool process_kbd(double time)
   coord3d force;
   f.x=0;f.y=0;da=0;
 
+#ifdef _DEBUG
   debug_key = (kbd & kDEBUG) != 0;
+#endif
 
   dang=DANG;force=FORCE;
   if (kbd & kRUN) {
@@ -219,5 +221,7 @@ void player_init(coord3d x,coord3d y,coord3d z)
   a.x=0;a.y=0;a.z=0;
   ang[0]=ang[1]=ang[2]=0;
   height=250;
+#ifdef _DEBUG
 	debug.clear();
+#endif
 }

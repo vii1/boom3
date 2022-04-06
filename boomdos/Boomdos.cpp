@@ -173,7 +173,7 @@ int main(int argc,char *argv[])
     if(playdemo) {
       Tvector v;
       angle a[3];
-      playdemo = demo->play(timer_clocks, &v, a);
+      if(!demo->play(timer_clocks, &v, a)) break;
       // map->move(view.x-v.x, view.y-v.y, view.z-v.z, a[0], a[1], a[2]);
       if( !player_idle( timer_clocks, true ) ) break;
       setviewpoint(v.x, v.y, v.z, a[0], a[1], a[2]);

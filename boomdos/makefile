@@ -19,10 +19,10 @@ TARGET_SYS	= dos
 OUTDIR_BASE	= $(ROOT)$(SEP)build.$(TARGET_SYS)
 OUTDIR		= $(OUTDIR_BASE)$(SEP)$(PROJECT)$(SEP)$(CONFIG).$(CPU)
 
-OPTIONS		= -bt=$(WATCOM_BT) -w1 -q -zp4 -mf -I$(ROOT)
+OPTIONS		= -bt=$(WATCOM_BT) -w1 -q -zp4 -mf -I$(ROOT) -xs
 
 !ifeqi CONFIG debug
-OPTIONS		+= -d2 -D_DEBUG -xs
+OPTIONS		+= -d2 -D_DEBUG
 !else
 OPTIONS		+= -onatx
 !endif

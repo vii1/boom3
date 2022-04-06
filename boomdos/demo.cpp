@@ -4,11 +4,13 @@
 #include "demo.h"
 #include "engine/debug.h"
 
+#ifdef _DEBUG
 static void chivar( const Tvector& viewPos, const angle angles[3] )
 {
     debug.printf( "View: x=%f, y=%f, z=%f\n", viewPos.x, viewPos.y, viewPos.z );
     debug.printf( "Angles: x=%f, y=%f, z=%f\n", angles[0], angles[1], angles[2] );
 }
+#endif
 
 Demo::Demo() : m_playPos( NULL )
 {
@@ -28,7 +30,9 @@ Demo* Demo::loadFromFile( const char* path )
     demo->m_frames.resize( length );
     fread( demo->m_frames.begin(), sizeof( DemoFrame ), length, f );
     fclose( f );
+#ifdef _DEBUG
     debug.printf( "Loaded demo: %d keyframes, %f seconds\n", length, demo->m_frames.back().timestamp / 1000. );
+#endif
     return demo;
 }
 
@@ -79,10 +83,12 @@ static inline bool linear( const DemoFrame& f1, const DemoFrame& f2, const DemoF
 
 void Demo::record( long time, const Tvector& viewPos, const angle ( &angles )[3] )
 {
+#ifdef _DEBUG
     debug.set_cursor( 0, 2 );
     debug.printf( "Time: %f\n", time / 1000. );
     debug.printf( "Frame: %4d\n", m_frames.size() );
     chivar( viewPos, angles );
+#endif
     // DemoFrame frame( time, viewPos, angles );
     // if( m_frames.size() >= 2 ) {
     // 	// si el penúltimo, último y actual frame son colineales, sustituye el último frame
@@ -107,18 +113,24 @@ static inline void copy3( T* dst, const T* src )
 bool Demo::play( long timestamp, Tvector* viewPosOut, angle anglesOut[3] )
 {
     assert( viewPosOut != NULL );
+#ifdef _DEBUG
     debug.set_cursor( 0, 2 );
     debug.printf( "Time: %f\n", timestamp / 1000. );
+#endif
     if( m_frames.size() == 0 ) return false;
     if( m_playPos == NULL ) m_playPos = m_frames.begin();
     while( m_playPos < m_frames.end() && m_playPos->timestamp < timestamp ) m_playPos++;
+#ifdef _DEBUG
     debug.printf( "Frame: %4d\n", m_playPos - m_frames.begin() );
     chivar(m_playPos->viewPos, m_playPos->angles);
+#endif
     if( m_playPos >= m_frames.end() ) {
         const DemoFrame& frame = m_frames.back();
         *viewPosOut			   = frame.viewPos;
         copy3( anglesOut, frame.angles );
+#ifdef _DEBUG
         chivar( *viewPosOut, anglesOut );
+#endif
         return false;
     } else if( m_playPos <= m_frames.begin() ) {
         const DemoFrame& frame = m_frames.front();
@@ -136,6 +148,8 @@ bool Demo::play( long timestamp, Tvector* viewPosOut, angle anglesOut[3] )
         *viewPosOut = m_playPos->viewPos;
         copy3( anglesOut, m_playPos->angles );
     }
+#ifdef _DEBUG
     chivar( *viewPosOut, anglesOut );
+#endif
     return true;
 }

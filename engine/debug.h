@@ -1,4 +1,4 @@
-#ifndef __DEBUG_H__
+#if !defined(__DEBUG_H__) && defined(_DEBUG)
 #define __DEBUG_H__
 
 #include "mono/mono.h"
