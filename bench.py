@@ -1,6 +1,7 @@
 from itertools import product
 from subprocess import run
 import re
+from datetime import datetime
 
 matrix = {
     'core': ['auto', 'dynamic', 'full', 'normal'],
@@ -26,6 +27,7 @@ matrix = [*filter(where, matrix)]
 total = len(matrix)
 num = 0
 results = []
+start = datetime.now()
 
 for i in matrix:
     core, fpu, cputype, res, execpu, execonfig = i
@@ -42,6 +44,9 @@ for i in matrix:
         '-set', 'cpu cycles=max'
     ]
     print(f"[{num}/{total}] {i}")
+    if num > 1:
+        now = datetime.now()
+        print(f"Elapsed: {now-start} - ETA: {(now-start)/num*total}")
     p = run(cmd)
     if p.returncode != 0:
         print(f"Process returned: {p.returncode}")
@@ -56,8 +61,6 @@ for i in matrix:
         r += list(m.groups()[::2])
     results.append(r)
     print(' '.join(r[len(i):]))
-
-    if num == 2: break
 
 with open("bench.csv", "w") as f:
     for r in results:
