@@ -31,6 +31,7 @@ clean: .SYMBOLIC
 	$(MAKE) -f $(ROOT)$(SEP)boomdos$(SEP)makefile clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT)
 	$(MAKE) -f $(ROOT)$(SEP)boomedit$(SEP)makefile clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT)
 	$(MAKE) -f $(ROOT)$(SEP)engine$(SEP)makefile clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT)
+	$(MAKE) -f $(ROOT)$(SEP)engine$(SEP)makefile clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU) ROOT=$(ROOT) EDITOR=1
 #	cd $(ROOT)$(SEP)fixmath
 #	$(MAKE) clean TARGET_SYS=$(TARGET_SYS) CONFIG=$(CONFIG) CPU=$(CPU)
 #	cd $+$(%cwd)$-
