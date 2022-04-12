@@ -3,13 +3,15 @@
 
 // INCLUDES //////////////////////////////////////////////////////////////////////
 
+#include "mono.h"   // include the monochrome header
+
+#ifdef _MONO_ENABLED
+
+#include "engine/Types.h"
+// #include "fixmath/fixmath.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
-
-#include "mono.h"   // include the monochrome header
-#include "engine/Types.h"
-// #include "fixmath/fixmath.h"
 
 // CLASS METHODS IMPLEMENTATION //////////////////////////////////////////////////
 
@@ -418,3 +420,5 @@ void mono_print::update_watches( void )
 }   // end update_watches
 
 //////////////////////////////////////////////////////////////////////////////////
+
+#endif // _MONO_ENABLED

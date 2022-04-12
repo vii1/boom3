@@ -4,6 +4,10 @@
 #ifndef MONOCHROME_H   // watch out for multiple inclusions
 #define MONOCHROME_H
 
+#if defined(__DOS__) && defined(_DEBUG)
+#define _MONO_ENABLED 1
+#endif
+
 // colors and styles for printing
 
 #define MONO_BLACK            0
@@ -56,40 +60,46 @@ typedef struct mono_watch_tag {
 
 // CLASSES ////////////////////////////////////////////////////////////////////
 
+#ifdef _MONO_ENABLED
+#define METHOD(x)
+#else
+#define METHOD(x) {x}
+#endif
+
 class mono_print   // monochrome display class
 {
 public:
-	mono_print( void );   // constructor
+	mono_print( void ) METHOD();   // constructor
 	~mono_print() {}      // destructor does nothing for now
 
-	void print( char* string );   // prints a string at the current cursor location
+	void print( char* string ) METHOD();   // prints a string at the current cursor location
 	// and style, similar to printf supports scrolling etc.
-	void printf(const char* format, ...);
+	void printf(const char* format, ...) METHOD();
 
 	void draw( char* string,   // "draws" a string anywhere with sent style
 	  int            x,        // no scrolling or logic
-	  int y, int style );
+	  int y, int style ) METHOD();
 
-	void set_cursor( int x, int y );     // positions the cursor in the 80x25 matrix
-	void get_cursor( int& x, int& y );   // retrieves the position of the cursor
-	void set_style( int new_style );     // sets the style of output
-	void enable();                       // enables output
-	void disable();                      // disables output
-	void scroll( int num_lines );        // scrolls the display from the bottom
-	void clear();                        // this function clears the display
+	void set_cursor( int x, int y ) METHOD();     // positions the cursor in the 80x25 matrix
+	void get_cursor( int& x, int& y ) METHOD();   // retrieves the position of the cursor
+	void set_style( int new_style ) METHOD();     // sets the style of output
+	void enable() METHOD();                       // enables output
+	void disable() METHOD();                      // disables output
+	void scroll( int num_lines ) METHOD();        // scrolls the display from the bottom
+	void clear() METHOD();                        // this function clears the display
 
 	// methods for debugging watch display
 
-	void delete_watches( void );   // deletes all watches
+	void delete_watches( void ) METHOD();   // deletes all watches
 
 	int add_watch( char* name,   // ascii name of variable, up to 15 chars
 	  void*              addr,   // address of variable to watch
 	  int                type,   // type of variable
 	  int                x,      // position of variable
 	  int                y,
-	  int                field_width );   // size of output field
+	  int                field_width ) METHOD(return 0;);   // size of output field
 
-	void update_watches( void );   // simply displays all the watches
+	void update_watches( void ) METHOD();   // simply displays all the watches
 
 private:
 	int     cx, cy;          // position of printing cursor on 80x25 matrix
