@@ -13,7 +13,7 @@
 #ifndef _VERTEX_H
 #define _VERTEX_H
 
-#include "boom.h"
+#include "engine/boom.h"
 
 // calculates the number of the refferences to each vertex
 void initverts( void );

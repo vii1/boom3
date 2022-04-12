@@ -13,7 +13,7 @@
 #ifndef _CLUSTER_H
 #define _CLUSTER_H
 
-#include "boom.h"
+#include "engine/boom.h"
 
 // initializes the clusters (sets all clusters to visible)
 void init_clusters( void );

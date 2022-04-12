@@ -13,8 +13,9 @@
 #ifndef _DRAW2D_H
 #define _DRAW2D_H
 
-#include "types.h"
+#include "engine/types.h"
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #define MoveTo(hdc,x,y) MoveToEx(hdc,x,y,NULL)

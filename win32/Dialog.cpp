@@ -11,6 +11,8 @@
 #define _DIALOG_CPP
 #include "dialog.h"
 #include <stdio.h>
+#include <commdlg.h>
+#include <stdlib.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // common dialog boxes

@@ -20,6 +20,7 @@
 #include "texture.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 // deletes the sector sc and all lines in it. deletes all holes that lead to sc
 void delsector(Tsector *sc)

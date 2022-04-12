@@ -12,10 +12,10 @@
 
 #define _BOOMEDIT_CPP
 #include "boomedit.h"
-#include "boom.h"
-#include "draw.h"
-#include "geom.h"
-#include "player.h"
+#include "engine/boom.h"
+#include "engine/draw.h"
+#include "engine/geom.h"
+#include "engine/player.h"
 #include "draw2d.h"
 #include "resource.h"
 #include "select.h"
@@ -23,14 +23,15 @@
 #include "vertex.h"
 #include "sector.h"
 #include "cluster.h"
-#include "dialog.h"
-#include "write.h"
-#include "read.h"
+#include "win32/dialog.h"
+#include "engine/write.h"
+#include "engine/read.h"
 #include "texture.h"
 #include "readbmp.h"
 
 #include <stdio.h>
 #include <crtdbg.h>
+#include <stdlib.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // local variables

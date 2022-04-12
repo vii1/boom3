@@ -13,7 +13,7 @@
 #ifndef _SECTOR_H
 #define _SECTOR_H
 
-#include "boom.h"
+#include "engine/boom.h"
 
 // deletes the sector sc and all lines in it. deletes all holes that lead to sc
 void delsector(Tsector *s);

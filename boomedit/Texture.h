@@ -13,7 +13,7 @@
 #ifndef _TEXTURE_H
 #define _TEXTURE_H
 
-#include "types.h"
+#include "engine/types.h"
 
 #ifdef _TEXTURE_CPP
   #define GLOBAL

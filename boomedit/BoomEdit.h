@@ -13,9 +13,9 @@
 #ifndef _BOOMEDIT_H
 #define _BOOMEDIT_H
 
-#include "types.h"
-#include "win32.h"
-#include "boom.h"
+#include "engine/types.h"
+#include "win32/win32.h"
+#include "engine/boom.h"
 
 #ifdef _BOOMEDIT_CPP
   #define GLOBAL

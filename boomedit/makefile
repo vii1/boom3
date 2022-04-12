@@ -4,7 +4,7 @@
 !include $(ROOT)/os.mif
 !endif
 
-PROJECT 	= boomdos
+PROJECT 	= boomedit
 
 !ifdef ROOT
 PROJ_DIR 	= $(ROOT)$(SEP)$(PROJECT)
@@ -15,11 +15,11 @@ ROOT		= ..
 
 CONFIG		= release
 CPU			= 386
-TARGET_SYS	= dos
+TARGET_SYS	= win
 OUTDIR_BASE	= $(ROOT)$(SEP)build.$(TARGET_SYS)
 OUTDIR		= $(OUTDIR_BASE)$(SEP)$(PROJECT)$(SEP)$(CONFIG).$(CPU)
 
-OPTIONS		= -bt=$(WATCOM_BT) -w1 -q -zp4 -mf -I$(ROOT) -xs
+OPTIONS		= -bt=$(WATCOM_BT) -w1 -q -zp4 -mf -I$(ROOT) #-xs
 
 !ifeqi CONFIG debug
 OPTIONS		+= -d2 -D_DEBUG
@@ -34,9 +34,19 @@ OPTIONS		+= -3r -fpi
 !endif
 
 EXE			= $(PROJECT)$(EXE_SUFFIX)
-SOURCEPATH  = $(PROJ_DIR)
+SOURCEPATH  = $(PROJ_DIR);$(ROOT)$(SEP)Win32
 
-OBJS		= boomdos.obj dos4gw.obj grtext.obj kbd.obj mouse.obj timer.obj vbe20.obj demo.obj bnchmark.obj
+OBJS		= BoomEdit.obj Cluster.obj Contour.obj Draw2d.obj Line.obj Readbmp.obj Sector.obj &
+			  Select.obj Texture.obj Vertex.obj &
+			  Dialog.obj Win32.obj
+
+RESOURCE	= $(OUTDIR)$(SEP)boomedit.res
+
+STDLIBS		= winmm
+
+!ifneq TARGET_SYS win
+!error BoomEdit is available only for Windows. Use TARGET_SYS=win
+!endif
 
 .BEFORE
 	@if not exist $(OUTDIR_BASE) mkdir $(OUTDIR_BASE)
@@ -46,7 +56,7 @@ OBJS		= boomdos.obj dos4gw.obj grtext.obj kbd.obj mouse.obj timer.obj vbe20.obj 
 all: $(EXE) .SYMBOLIC
 	@%null
 
-EDITOR = 0
+EDITOR = 1
 # !include ../fixmath/fixmath.mif
 !include $(ROOT)/engine/engine.mif
 
@@ -55,24 +65,30 @@ OPTIONS += $(INCLUDE) $(DEFINE)
 $(EXE): $(OUTDIR)$(SEP)$(EXE) .SYMBOLIC
 	@%null
 
-$(OUTDIR)$(SEP)$(EXE): $(OBJS) $(LIBS)
+$(OUTDIR)$(SEP)$(EXE): $(OBJS) $(LIBS) $(RESOURCE)
 	*wlink &
 		option quiet &
 !ifeqi CONFIG debug
 		debug all &
 !endif
-		$(WLINK_TARGET_SYS) &
+		system nt_win &
 		option eliminate &
 		option stack=32768 &
 		path $(OUTDIR) &
 		name $^@ &
 		file { $(OBJS) } &
-		libfile { $(LIBS) }
+		libfile { $(LIBS) } &
+		resource { $(RESOURCE) } &
+		library { $(STDLIBS) }
+
+.SUFFIXES: .res .rc
 
 .c: $(SOURCEPATH)
 .cpp: $(SOURCEPATH)
 .asm: $(SOURCEPATH)
+.rc: $(SOURCEPATH)
 .obj: $(OUTDIR)
+.res: $(OUTDIR)
 
 .ERASE
 .c.obj: .AUTODEPEND
@@ -86,7 +102,12 @@ $(OUTDIR)$(SEP)$(EXE): $(OBJS) $(LIBS)
 .asm.obj: .AUTODEPEND
 	*wasm -i=$(ROOT) -q -fo=$(OUTDIR)\$^. -fr=$(OUTDIR)\$^& $[@
 
+.ERASE
+.rc.res: .AUTODEPEND
+	*wrc -q -r -ad -bt=nt -i=$(SOURCEPATH) -fo=$(OUTDIR)\$^. -fr=$(OUTDIR)\$^& $[@
+
 clean: .SYMBOLIC
 	@if exist $(OUTDIR)$(SEP)*.err $(DELETE) $(OUTDIR)$(SEP)*.err
 	@if exist $(OUTDIR)$(SEP)*.obj $(DELETE) $(OUTDIR)$(SEP)*.obj
+	@if exist $(OUTDIR)$(SEP)*.res $(DELETE) $(OUTDIR)$(SEP)*.res
 	@if exist $(OUTDIR)$(SEP)$(EXE) $(DELETE) $(OUTDIR)$(SEP)$(EXE)

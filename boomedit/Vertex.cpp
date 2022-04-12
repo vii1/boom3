@@ -17,7 +17,7 @@
 #include "sector.h"
 
 #include <math.h>
-#include <memory.h>
+#include <stdlib.h>
 
 static int refs[MAX_VERTICES];
 static bool viss[MAX_VERTICES];
@@ -66,7 +66,8 @@ void initverts( void )
 // adds a vertex (x,y). returns the index
 int addvertex(coord3d x,coord3d y)
 {
-  for (int i=0;i<vertsnum;i++)
+  int i;
+  for (i=0;i<vertsnum;i++)
     if (verts[i].x==x && verts[i].y==y) {
       refs[i]++;
       return i;
@@ -107,7 +108,8 @@ void compactverts( void )
   for (int v=0;v<vertsnum;v++) {
     if (refs[v]==0) {
       vertsnum--;
-      for (int i=v;i<vertsnum;i++) {
+      int i;
+      for (i=v;i<vertsnum;i++) {
         verts[i]=verts[i+1];
         refs[i]=refs[i+1];
       }

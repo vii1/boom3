@@ -13,7 +13,7 @@
 #ifndef _LINE_H
 #define _LINE_H
 
-#include "boom.h"
+#include "engine/boom.h"
 
 // deletes the line l and all it's walls
 void delline(Tline *l);

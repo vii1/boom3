@@ -15,7 +15,7 @@
 #include "vertex.h"
 #include "select.h"
 
-#include "boom.h"
+#include "engine/boom.h"
 
 #include <stdio.h>
 

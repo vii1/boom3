@@ -13,8 +13,8 @@
 #ifndef _SELECT_H
 #define _SELECT_H
 
-#include "types.h"
-#include "boom.h"
+#include "engine/types.h"
+#include "engine/boom.h"
 
 #include <windows.h>
 

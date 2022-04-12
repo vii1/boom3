@@ -4,10 +4,16 @@
 !include $(ROOT)/os.mif
 !endif
 
+EDITOR		= 0
+
+!ifneq EDITOR 1
 PROJECT 	= engine
+!else
+PROJECT		= engineed
+!endif
 
 !ifdef ROOT
-PROJ_DIR 	= $(ROOT)$(SEP)$(PROJECT)
+PROJ_DIR 	= $(ROOT)$(SEP)engine
 !else
 PROJ_DIR	= .
 ROOT		= ..
@@ -19,6 +25,10 @@ OUTDIR_BASE	= $(ROOT)$(SEP)build.$(TARGET_SYS)
 OUTDIR		= $(OUTDIR_BASE)$(SEP)$(PROJECT)$(SEP)$(CONFIG).$(CPU)
 
 OPTIONS		= -bt=$(WATCOM_BT) -w1 -we -q -zp4 -mf -I$(ROOT) #-za99
+
+!ifeq EDITOR 1
+OPTIONS		+= -DEDITOR
+!endif
 
 !ifeqi CONFIG debug
 OPTIONS		+= -d2 -D_DEBUG -DDEBUG_PREVIEW -xs

@@ -12,10 +12,12 @@
 
 #define _READBMP_CPP
 #include "readbmp.h"
-#include "types.h"
+#include "engine/types.h"
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 ////////////////////////////////////////////////////////////////////////////
 

@@ -11,13 +11,21 @@
 #ifndef _WIN32_H
 #define _WIN32_H
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <commctrl.h>
+#include <mmsystem.h>
 
 #ifdef _WIN32_CPP
 #define GLOBAL
 #else
 #define GLOBAL extern
+#endif
+
+// missing from watcom's commctrl.h
+#ifndef PGF_CALCWIDTH
+# define PGF_CALCWIDTH       1
+# define PGF_CALCHEIGHT      2
 #endif
 
 GLOBAL HWND hwndMain;

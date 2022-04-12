@@ -142,7 +142,8 @@ void addcontour(Tnode *cont)
   if (cursector && inside(cursector,cont)) {
     // the contour is inside cursector
     Tnode *c=cont;
-    for (Tline **ll=&cursector->lines;*ll;ll=&((*ll)->next));
+    Tline **ll;
+    for (ll=&cursector->lines;*ll;ll=&((*ll)->next));
     Tline **l0=ll;
     // creates a line for each segment in the contour
     // adds the contour to cursector
@@ -168,7 +169,8 @@ void addcontour(Tnode *cont)
       *ll=l;
     }
     *ll=NULL;
-    for (Tline *l=*l0;l->next;l=l->next)
+    Tline *l;
+    for (l=*l0;l->next;l=l->next)
       l->nextc=l->next;
     l->nextc=*l0;
     l->options=liCONTOUR_END;
@@ -197,7 +199,8 @@ void addcontour(Tnode *cont)
     if (s) {
       // if the contour is inside s, creates another contour with
       // opposite direction and adds it to s
-      for (Tline **ll=&s->lines;*ll;ll=&((*ll)->next));
+      Tline **ll;
+      for (ll=&s->lines;*ll;ll=&((*ll)->next));
       Tline **l0=ll;
       int n;
       for (n=0,cn=cont;cn;cn=cn->next,ll=&((*ll)->next),n++) {
@@ -222,7 +225,8 @@ void addcontour(Tnode *cont)
         *ll=l;
       }
       *ll=NULL;
-      for (Tline *l=*l0;l->next;l=l->next)
+      Tline *l;
+      for (l=*l0;l->next;l=l->next)
         l->nextc=l->next;
       l->nextc=*l0;
       l->options=liCONTOUR_END;
@@ -333,7 +337,8 @@ void addcontour(Tnode *cont)
       *ll=l;
     }
     *ll=NULL;
-    for (Tline *l=*l0;l->next;l=l->next)
+    Tline *l;
+    for (l=*l0;l->next;l=l->next)
       l->nextc=l->next;
     l->nextc=*l0;
     l->options=liCONTOUR_END;

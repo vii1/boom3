@@ -17,6 +17,8 @@
 #include "boomedit.h"
 #include "select.h"
 
+#include <stdlib.h>
+
 // deletes the line l and all it's walls
 void delline(Tline *l)
 {

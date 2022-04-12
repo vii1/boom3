@@ -16,7 +16,9 @@
 #include "select.h"
 #include "cluster.h"
 #include "vertex.h"
-#include "geom.h"
+#include "engine/geom.h"
+
+#include <stdlib.h>
 
 static HPEN linepen,gridpen,selvpen,boxpen,selspen,contpen,vertpen,sppen,cppen;
 static HBRUSH brush1;

@@ -13,7 +13,7 @@
 #ifndef _READBMP_H
 #define _READBMP_H
 
-#include "types.h"
+#include "engine/types.h"
 
 // reads bitmap from a file
 // returns the palette, bits and size

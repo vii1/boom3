@@ -13,7 +13,7 @@
 #ifndef _CONTOUR_H
 #define _CONTOUR_H
 
-#include "boom.h"
+#include "engine/boom.h"
 
 struct Tnode {
   coord3d x,y;

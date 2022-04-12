@@ -12,8 +12,8 @@
 
 #define _TEXTURE_CPP
 #include "texture.h"
-#include "Ttexture.h"
-#include "boom.h"
+#include "engine/Ttexture.h"
+#include "engine/boom.h"
 
 #include <string.h>
 #include <malloc.h>
